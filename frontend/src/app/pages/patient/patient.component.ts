@@ -207,12 +207,12 @@ export class PatientComponent implements OnInit {
   }
 
   viewappointmentdetails(id) {
-    this.router.navigate(['main/appointment/' + id]);
+    this.router.navigate(['back-office/main/appointment/' + id]);
   }
 
 
   viewinvoice(id) {
-    this.router.navigate(['main/invoice/' + id]);
+    this.router.navigate(['back-office/main/invoice/' + id]);
   }
 
 }
