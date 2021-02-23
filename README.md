@@ -4,7 +4,7 @@
 # Demo Project
  Checkout: http://dental-demo1.s3-website-ap-southeast-1.amazonaws.com/back-office/login
 
-# Teck Stack
+# Tech Stack
  - Spring Boot
  - Angular
  - MySQL, PostgreSQL
