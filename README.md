@@ -12,3 +12,8 @@
 
 # Deployment
  - AWS EC2, Elasticbeanstalk, S3 Bucket, RDS (Free Tier - 1 year)
+
+ ## Demo
+ https://www.youtube.com/watch?v=z7Z-gR28R6Y
+ <br>
+ [![Alt text](https://img.youtube.com/vi/z7Z-gR28R6Y/0.jpg)](https://www.youtube.com/watch?v=z7Z-gR28R6Y)
