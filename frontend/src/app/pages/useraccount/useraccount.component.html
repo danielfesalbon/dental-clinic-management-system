@@ -1,0 +1,93 @@
+<p-card>
+    <p-table [value]="users" styleClass="p-datatable-responsive-demo">
+        <ng-template pTemplate="header">
+            <tr>
+                <th class="narrow-col">Staff ID</th>
+                <th class="narrow-col">Title</th>
+                <th class="wide-col">Name</th>
+                <th class="narrow-col">Disabled</th>
+                <th>Action</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-data>
+            <tr>
+                <td class="narrow-col"><span class="p-column-title">Staff ID</span>{{data.username}}</td>
+                <td class="narrow-col"><span class="p-column-title">Title</span>{{data.title}}</td>
+                <td class="wide-col"><span class="p-column-title">Name</span>{{data.firstname}} {{data.lastname}}</td>
+                <td class="narrow-col"><span class="p-column-title">Disabled</span>{{ getstatus(data.disabled) }}</td>
+                <td><span class="p-column-title">Action</span>
+                    <button pButton pRipple icon="pi pi-pencil" (click)="viewuser(data)" class="p-button-raised p-button-primary"></button>
+                    <button *ngIf="data.disabled" pButton pRipple icon="pi pi-unlock" class="p-button-raised p-button-warning act-button" (click)="disableaccount(data)"></button>
+                    <button *ngIf="data.disabled == null || !data.disabled" pButton pRipple icon="pi pi-lock" class="p-button-raised p-button-warning act-button" (click)="disableaccount(data)"></button>
+                    <button pButton pRipple icon="pi pi-trash" class="p-button-raised p-button-danger act-button" (click)="deleteuser(data)"></button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</p-card>
+
+
+
+
+<p-dialog header="User account" [(visible)]="usermodal" [modal]="true" [style]="{width: '70vw'}" [baseZIndex]="5" [draggable]="false" [resizable]="false" [closable]="true">
+
+    <form [formGroup]="userform" (ngSubmit)="saveuser(userform.value)" class="p-grid p-fluid">
+        <div class="p-col-12 p-md-6 p-lg-4">
+            <label for="username">Username</label>
+            <input id="username" type="text" pInputText formControlName="username">
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-4">
+
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-4">
+            <label for="title">Title</label>
+            <input id="title" type="text" pInputText formControlName="title">
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-4">
+            <label for="firstname">Firstname</label>
+            <input id="firstname" type="text" pInputText formControlName="firstname">
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-4">
+            <label for="lastname">Lastname</label>
+            <input id="lastname" type="text" pInputText formControlName="lastname">
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-4">
+            <label for="middlename">Middlename</label>
+            <input id="middlename" type="text" pInputText formControlName="middlename">
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-4">
+            <label for="contact">Contact</label>
+            <input id="contact" type="text" pInputText formControlName="contact" placeholder="Required">
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-4">
+            <label for="email">Email</label>
+            <input id="email" type="text" pInputText formControlName="email">
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-4">
+            <label for="address">Address</label>
+            <input id="address" type="text" pInputText formControlName="address">
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-4">
+            <label for="gender">Gender</label>
+            <p-dropdown [options]="genderoptions" formControlName="gender" placeholder="Select a gender" optionLabel="value">
+            </p-dropdown>
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-4">
+            <label for="birthdate">Birthday</label>
+            <p-calendar inputId="birthdate" formControlName="birthdate" [monthNavigator]="true" [yearNavigator]="true" yearRange="1970:2030" [touchUI]="true"></p-calendar>
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-4">
+            <label for="specialization">Specialization</label>
+            <input id="specialization" type="text" pInputText formControlName="specialization">
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-12">
+            <button pButton pRipple label="Update" type="submit" [disabled]="!userform.valid" class="p-button-raised p-button-success submit-button"></button>
+        </div>
+    </form>
+
+
+    <!--<ng-template pTemplate="footer">
+        <p-button icon="pi pi-times" pRipple (click)="usermodal=false" label="Close" styleClass="p-button-text">
+        </p-button>
+    </ng-template>-->
+</p-dialog>

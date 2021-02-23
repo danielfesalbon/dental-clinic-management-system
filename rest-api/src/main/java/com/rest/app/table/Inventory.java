@@ -48,6 +48,14 @@ public class Inventory {
 	@Column(name = "updatedby")
 	private String updatedby;
 
+	@Override
+	public String toString() {
+		return "Inventory [id=" + id + ", name=" + name + ", description=" + description + ", type=" + type
+				+ ", quantity=" + quantity + ", unitprice=" + unitprice + ", supplier=" + supplier + ", itemcode="
+				+ itemcode + ", datecreated=" + datecreated + ", createdby=" + createdby + ", lastupdated="
+				+ lastupdated + ", updatedby=" + updatedby + "]";
+	}
+
 	public Long getId() {
 		return id;
 	}

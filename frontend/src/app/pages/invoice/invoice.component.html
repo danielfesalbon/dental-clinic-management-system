@@ -1,0 +1,183 @@
+<p-card>
+    <p-tabView>
+        <p-tabPanel header="Invoice Records">
+
+            <p-table [value]="invoicelist" styleClass="p-datatable-responsive-demo p-datatable-sm">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th class="narrow-col">Invoice ID</th>
+                        <th class="wide-col">Patient</th>
+                        <th class="narrow-col">Amount</th>
+                        <th class="narrow-col">Paid</th>
+                        <th class="narrow-col">Date created</th>
+                        <th class="narrow-col">Details</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-data>
+                    <tr>
+                        <td class="average-col"><span class="p-column-title">Invoice ID</span>{{data.id}}</td>
+                        <td class="wide-col"><span class="p-column-title">Patient</span>{{data.ptname}}</td>
+                        <td class="narrow-col"><span class="p-column-title">Amount</span>{{data.amount | number: '1.2'}}
+                        </td>
+                        <td class="narrow-col"><span class="p-column-title">Paid</span>{{data.paid| number: '1.2'}}</td>
+                        <td class="narrow-col"><span class="p-column-title">Date created</span>{{data.datecreated | date: 'shortDate'}}</td>
+                        <td class="average-col"><span class="p-column-title">Details</span>
+                            <button pButton pRipple icon="pi pi-external-link" class="p-button-raised p-button-help" (click)="viewinvoice(data.id)"></button>
+                        </td>
+
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="summary">
+                    <p-paginator [rows]="invoicerow" [totalRecords]="invoicetotal" [rowsPerPageOptions]="invoiceoptions" (onPageChange)="paginateInvoice($event)"></p-paginator>
+                </ng-template>
+            </p-table>
+
+        </p-tabPanel>
+        <p-tabPanel header="Create New Invoice">
+
+
+            <form [formGroup]="patientform" (ngSubmit)="onSubmit(patientform.value)" class="p-grid p-fluid">
+                <div class="p-col-12 p-md-6 p-lg-3">
+                    <label for="patientid">Search Patient</label>
+                    <div class="p-inputgroup">
+                        <input id="patientid" type="text" pInputText placeholder="Patient ID" formControlName="ptid">
+                        <button type="button" pButton pRipple icon="pi pi-search" (click)="searchPatient(patientform.value)"></button>
+                    </div>
+                </div>
+
+                <div class="p-col-12 p-md-6 p-lg-5">
+                    <label for="ptname">Name</label>
+                    <input id="ptname" type="text" pInputText placeholder="Required" formControlName="ptname">
+                </div>
+
+                <div class="p-col-12 p-md-6 p-lg-4">
+                    <label for="ptcontact">Contact</label>
+                    <input id="ptcontact" type="text" pInputText formControlName="ptcontact" placeholder="Required">
+                </div>
+
+                <div class="p-col-12 p-md-6 p-lg-12">
+                    <label for="ptaddress">Address</label>
+                    <input id="ptaddress" type="text" pInputText formControlName="ptaddress" placeholder="Required">
+                </div>
+
+                <div class="p-col-12 p-md-6 p-lg-6">
+                    <label for="ptaddress">Total Amount: {{invoice.amount | number: '1.2'}}</label>
+                </div>
+
+                <div class="p-col-12 p-md-6 p-lg-12 panel">
+                    <button pButton pRipple label="Save" icon="pi pi-save" type="submit" [disabled]="!patientform.valid || invoice.amount == 0" class="p-button-raised p-button-success submit-button"></button>
+                </div>
+            </form>
+
+            <p-accordion>
+
+
+                <p-accordionTab header="Add Item">
+                    <form [formGroup]="searchitem" (ngSubmit)="searchItem(searchitem.value)" class="p-grid p-fluid">
+                        <div class="p-col-12 p-md-6 p-lg-4">
+                            <div class="p-inputgroup">
+                                <input id="name" type="text" pInputText placeholder="Search item to add" formControlName="name">
+                                <button type="submit" pButton pRipple icon="pi pi-search" [disabled]="!searchitem.valid"></button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <form [formGroup]="customform" (ngSubmit)="onAdd(customform.value)" class="p-grid p-fluid">
+
+                        <div class="p-col-12 p-md-6 p-lg-5">
+                            <label for="cname">Name</label>
+                            <input id="cname" type="text" pInputText placeholder="Required" formControlName="name">
+                        </div>
+
+                        <div class="p-col-12 p-md-6 p-lg-4">
+                            <label for="cquantity">Quantity</label>
+                            <p-inputNumber inputId="cquantity" [min]="1" formControlName="quantity">
+                            </p-inputNumber>
+                        </div>
+
+                        <div class="p-col-12 p-md-6 p-lg-3">
+                            <label for="ctotalamount">Amount</label>
+                            <p-inputNumber formControlName="totalamount" inputId="ctotalamount" placeholder="(0.00)Required" mode="decimal" [minFractionDigits]="2" [maxFractionDigits]="5">
+                            </p-inputNumber>
+                        </div>
+
+                        <div class="p-col-12 p-md-6 p-lg-12 panel">
+                            <button pButton pRipple icon="pi pi-plus" label="Add" type="submit" [disabled]="!customform.valid" class="p-button-raised p-button-success submit-button"></button>
+                        </div>
+                    </form>
+
+                    <p-table [value]="inventory" styleClass="p-datatable-responsive-demo p-datatable-sm">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th class="narrow-col">View</th>
+                                <th class="wide-col">Name</th>
+                                <th class="narrow-col">Stocks</th>
+                                <th class="narrow-col">Unit Price</th>
+                                <th class="narrow-col">Quantity</th>
+                                <th class="narrow-col">Add</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-data>
+                            <tr>
+                                <td class="narrow-col"><span class="p-column-title">View</span>
+                                    <button pButton pRipple icon="pi pi-external-link" class="p-button-raised p-button-help"></button>
+                                </td>
+                                <td class="wide-col"><span class="p-column-title">Name</span>{{data.name}}</td>
+                                <td class="narrow-col"><span class="p-column-title">Stocks</span>{{data.quantity}}
+                                </td>
+                                <td class="narrow-col"><span class="p-column-title">Unit Price</span>{{data.unitprice | number: '1.2'}}
+                                </td>
+                                <td class="narrow-col"><span class="p-column-title">Quantity</span>
+                                    <div class="input-qty">
+                                        <p-inputNumber inputId="qty" [min]="1" [max]="data.quantity" size="1" [(ngModel)]="data.stock">
+                                        </p-inputNumber>
+                                    </div>
+                                </td>
+                                <td class="narrow-col"><span class="p-column-title">Add</span>
+                                    <button pButton pRipple icon="pi pi-plus-circle" class="p-button-raised p-button-help" (click)="addtocart(data)"></button>
+                                </td>
+
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="summary">
+                            <p-paginator [rows]="invrow" [totalRecords]="invtotal" [rowsPerPageOptions]="invoptions" (onPageChange)="invpaginate($event)"></p-paginator>
+                        </ng-template>
+                    </p-table>
+                </p-accordionTab>
+            </p-accordion>
+
+
+            <p-table [value]="invoiceitem" styleClass="p-datatable-responsive-demo p-datatable-sm">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th class="narrow-col"></th>
+                        <th class="wide-col">Name</th>
+                        <th class="narrow-col">Unit Price</th>
+                        <th class="narrow-col">Quantity</th>
+                        <th class="narrow-col">Total amount</th>
+                        <th class="narrow-col">Remove</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-data>
+                    <tr>
+                        <td class="narrow-col"> </td>
+                        <td class="wide-col"><span class="p-column-title">Name</span>{{data.name}}</td>
+                        <td class="narrow-col"><span class="p-column-title">Unit Price</span>{{data.unitprice | number: '1.2'}} </td>
+                        <td class="narrow-col"><span class="p-column-title">Quantity</span>{{data.quantity}} </td>
+                        <td class="narrow-col"><span class="p-column-title">Total amount</span>{{data.totalamount | number: '1.2'}} </td>
+                        <td class="narrow-col"><span class="p-column-title">Remove</span>
+                            <button pButton pRipple icon="pi pi-times" class="p-button-raised p-button-help" (click)="removeItem(data)"></button>
+                        </td>
+                    </tr>
+                </ng-template>
+                <!--<ng-template pTemplate="summary">
+                    <p-paginator [rows]="invrow" [totalRecords]="invtotal" [rowsPerPageOptions]="invoptions" (onPageChange)="invpaginate($event)"></p-paginator>
+                </ng-template>-->
+            </p-table>
+
+
+
+        </p-tabPanel>
+
+    </p-tabView>
+</p-card>

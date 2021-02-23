@@ -43,8 +43,15 @@ public class Invoice {
 	private Date datecreated;
 	@Column(name = "updatedby")
 	private String updatedby;
-	@Column(name = "dateupdated")
-	private Date dateupdated;
+	@Column(name = "lastupdated")
+	private Date lastupdated;
+
+	@Override
+	public String toString() {
+		return "Invoice [id=" + id + ", ptid=" + ptid + ", ptname=" + ptname + ", ptcontact=" + ptcontact
+				+ ", ptaddress=" + ptaddress + ", amount=" + amount + ", paid=" + paid + ", createdby=" + createdby
+				+ ", datecreated=" + datecreated + ", updatedby=" + updatedby + ", lastupdated=" + lastupdated + "]";
+	}
 
 	public Long getId() {
 		return id;
@@ -126,12 +133,12 @@ public class Invoice {
 		this.updatedby = updatedby;
 	}
 
-	public Date getDateupdated() {
-		return dateupdated;
+	public Date getLastupdated() {
+		return lastupdated;
 	}
 
-	public void setDateupdated(Date dateupdated) {
-		this.dateupdated = dateupdated;
+	public void setLastupdated(Date lastupdated) {
+		this.lastupdated = lastupdated;
 	}
 
 }

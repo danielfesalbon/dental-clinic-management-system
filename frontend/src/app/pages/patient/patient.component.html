@@ -1,0 +1,175 @@
+<p-card>
+
+    <form [formGroup]="patientform" (ngSubmit)="onSubmit(patientform.value)" class="p-grid p-fluid">
+        <div class="p-col-12 p-md-6 p-lg-4">
+            <label for="firstname">Firstname</label>
+            <input id="firstname" type="text" pInputText formControlName="firstname" placeholder="Required">
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-4">
+            <label for="lastname">Lastname</label>
+            <input id="lastname" type="text" pInputText formControlName="lastname" placeholder="Required">
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-4">
+            <label for="middlename">Middlename</label>
+            <input id="middlename" type="text" pInputText formControlName="middlename">
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-3">
+            <label for="contact">Contact</label>
+            <input id="contact" type="text" pInputText formControlName="contact" placeholder="Required">
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-2">
+            <label for="basic">Birthday</label>
+            <p-calendar inputId="basic" formControlName="birthdate" [monthNavigator]="true" [yearNavigator]="true" yearRange="1970:2030"></p-calendar>
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-4">
+            <label for="emailaddress">Email</label>
+            <input id="emailaddress" type="text" pInputText formControlName="email">
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-3">
+            <label for="gender">Gender</label>
+            <p-dropdown [options]="genderoptions" formControlName="gender" placeholder="Select a gender" optionLabel="value">
+            </p-dropdown>
+
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-12">
+            <label for="address">Address</label>
+            <input id="address" type="text" pInputText formControlName="address" placeholder="Required">
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-6">
+            <button pButton pRipple type="button" label="Add New Prescription" class="p-button-raised p-button-help" (click)="newprescription()"></button>
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-6">
+            <button pButton type="submit" pRipple label="Update" [disabled]="!patientform.valid" class="p-button-raised p-button-success"></button>
+        </div>
+    </form>
+
+    <p-tabView>
+        <p-tabPanel header="Appointments">
+
+            <p-table [value]="applist" styleClass="p-datatable-responsive-demo p-datatable-sm">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th class="narrow-col">ID</th>
+                        <th class="narrow-col">Date</th>
+                        <th class="narrow-col">Time</th>
+                        <th class="average-col">Contact</th>
+                        <th class="narrow-col">Details</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-data>
+                    <tr>
+                        <td class="narrow-col"><span class="p-column-title">ID</span>{{data.id}}
+                        </td>
+                        <td class="narrow-col"><span class="p-column-title">Date</span>{{data.scheddate| date: 'shortDate'}}
+                        </td>
+                        <td class="narrow-col"><span class="p-column-title">Time</span>{{data.schedtime}}</td>
+                        <td class="average-col"><span class="p-column-title">Contact</span>{{data.ptcontact}}
+                        </td>
+
+                        <td class="narrow-col"><span class="p-column-title">Details</span>
+                            <button pButton pRipple icon="pi pi-external-link" class="p-button-raised p-button-help" (click)="viewappointmentdetails(data.id)"></button>
+                        </td>
+
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="summary">
+                    <p-paginator [rows]="approw" [totalRecords]="apptotal" [rowsPerPageOptions]="appoptions" (onPageChange)="paginateApp($event)"></p-paginator>
+                </ng-template>
+            </p-table>
+
+        </p-tabPanel>
+        <p-tabPanel header="Prescriptions">
+
+            <p-table [value]="presclist" styleClass="p-datatable-responsive-demo p-datatable-sm">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th class="narrow-col">ID</th>
+                        <th class="narrow-col">Status</th>
+                        <th class="narrow-col">Date prescribed</th>
+                        <th class="narrow-col">Prescribed by</th>
+                        <th class="narrow-col">Details</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-data>
+                    <tr>
+                        <td class="average-col"><span class="p-column-title">Invoice ID</span>{{data.id}}</td>
+                        <td class="average-col"><span class="p-column-title">Status</span>{{ prescriptionStatus(data.active) }}</td>
+
+                        <td class="narrow-col"><span class="p-column-title">Date prescribed</span>{{data.dateprescribed | date: 'shortDate'}}
+                        </td>
+                        <td class="narrow-col"><span class="p-column-title">Prescribed by</span>{{data.prescribedby}}
+                        </td>
+                        <td class="average-col"><span class="p-column-title">Details</span>
+                            <button pButton pRipple icon="pi pi-external-link" class="p-button-raised p-button-help" (click)="viewprescription(data)"></button>
+                        </td>
+
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="summary">
+                    <p-paginator [rows]="prescrow" [totalRecords]="presctotal" [rowsPerPageOptions]="prescoptions" (onPageChange)="paginateTx($event)"></p-paginator>
+                </ng-template>
+            </p-table>
+
+
+        </p-tabPanel>
+
+        <p-tabPanel header="Transactions">
+
+            <p-table [value]="txlist" styleClass="p-datatable-responsive-demo p-datatable-sm">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th class="narrow-col">Invoice ID</th>
+                        <th class="narrow-col">Amount</th>
+                        <th class="narrow-col">Paid</th>
+                        <th class="narrow-col">Date created</th>
+                        <th class="narrow-col">Details</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-data>
+                    <tr>
+                        <td class="average-col"><span class="p-column-title">Invoice ID</span>{{data.id}}</td>
+                        <td class="narrow-col"><span class="p-column-title">Amount</span>{{data.amount | number: '1.2'}}
+                        </td>
+                        <td class="narrow-col"><span class="p-column-title">Paid</span>{{data.paid| number: '1.2'}}</td>
+                        <td class="narrow-col"><span class="p-column-title">Date created</span>{{data.datecreated | date: 'shortDate'}}
+                        </td>
+                        <td class="average-col"><span class="p-column-title">Details</span>
+                            <button pButton pRipple icon="pi pi-external-link" class="p-button-raised p-button-help" (click)="viewinvoice(data.id)"></button>
+                        </td>
+
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="summary">
+                    <p-paginator [rows]="txrow" [totalRecords]="txtotal" [rowsPerPageOptions]="txoptions" (onPageChange)="paginateTx($event)"></p-paginator>
+                </ng-template>
+            </p-table>
+
+        </p-tabPanel>
+    </p-tabView>
+
+</p-card>
+
+
+<p-dialog header="Prescription Details" [(visible)]="prmodal" [style]="{width: '80vw'}" [baseZIndex]="10" modal="true">
+
+
+    <form [formGroup]="prescform" (ngSubmit)="submitPrescription(prescform.value)" class="p-grid p-fluid">
+
+        <div class="p-col-12 p-md-6 p-lg-12 p-field">
+            <label for="presremarks">Notes:</label>
+            <p-editor id="presremarks" formControlName="presremarks" [style]="{'height':'200px'}"></p-editor>
+        </div>
+
+        <div class="p-col-12 p-md-6 p-lg-12">
+            <p-checkbox formControlName="active" binary="true" inputId="active"></p-checkbox>
+            <label for="active"> Status(Currently Prescribe/Unpresribed)</label>
+
+        </div>
+
+        <div class="p-col-12 p-md-6 p-lg-12 panel">
+            <button pButton pRipple label="Save" type="submit" [disabled]="!prescform.valid" class="p-button-raised p-button-success submit-button"></button>
+        </div>
+    </form>
+
+
+</p-dialog>

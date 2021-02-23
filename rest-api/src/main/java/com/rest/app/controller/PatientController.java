@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.rest.app.service.PatientService;
 import com.rest.app.table.Patient;
-import com.rest.app.util.PatientDetails;
+import com.rest.app.table.Prescription;
 
 /**
  * @author danielf
@@ -36,13 +36,19 @@ public class PatientController {
 	private PatientService patientService;
 
 	@GetMapping("/list")
-	public List<Patient> getPatientList() {
-		return patientService.getPatientList();
+	public ResponseEntity<Map<String, Object>> getPatientList(@RequestParam(required = false, name = "row") Integer row,
+			@RequestParam(required = false, name = "page") Integer page) {
+		return patientService.getPatientList(row, page);
 	}
 
 	@PostMapping("/save")
 	public ResponseEntity<Map<String, Object>> savePatient(@RequestBody Patient patient) {
 		return patientService.savePatient(patient);
+	}
+	
+	@PostMapping("/upload")
+	public ResponseEntity<Map<String, Object>> uploadPatient(@RequestBody List<Patient> patient) {
+		return patientService.uploadPatient(patient);
 	}
 
 	@PutMapping("/update")
@@ -51,8 +57,19 @@ public class PatientController {
 	}
 
 	@GetMapping("/get")
-	public ResponseEntity<PatientDetails> getPatient(@RequestParam(required = false, name = "id") Long id) {
-		return patientService.getPatient(id);
+	public ResponseEntity<Map<String, Object>> getPatient(@RequestParam(required = false, name = "id") Long id,
+			@RequestParam(required = false, name = "approw") Integer approw,
+			@RequestParam(required = false, name = "apppage") Integer apppage,
+			@RequestParam(required = false, name = "txrow") Integer txrow,
+			@RequestParam(required = false, name = "txpage") Integer txpage,
+			@RequestParam(required = false, name = "prescrow") Integer prescrow,
+			@RequestParam(required = false, name = "prescpage") Integer prescpage) {
+		return patientService.getPatient(id, approw, apppage, txrow, txpage, prescrow, prescpage);
+	}
+
+	@PostMapping("/prescription/save")
+	public ResponseEntity<Map<String, Object>> makePrescription(@RequestBody Prescription prescription) {
+		return patientService.makePrescription(prescription);
 	}
 
 }

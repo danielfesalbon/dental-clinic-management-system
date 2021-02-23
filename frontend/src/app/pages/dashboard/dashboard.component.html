@@ -1,0 +1,66 @@
+<!--<div class="p-grid">
+    <div class="p-col-12 p-md-6 p-lg-3">
+        <p-card subheader=" Daily Appointments">
+            {{dashboard.schedcount}}
+        </p-card>
+    </div>
+    <div class="p-col-12 p-md-6 p-lg-3">
+        <p-card subheader="Daily Transactions">
+            {{dashboard.txcount}}
+        </p-card>
+    </div>
+    <div class="p-col-12 p-md-6 p-lg-3">
+        <p-card subheader="Patient Record">
+            {{dashboard.patient}}
+        </p-card>
+    </div>
+    <div class="p-col-12 p-md-6 p-lg-3">
+        <p-card subheader="Registered Users">
+            {{dashboard.saveduser}}
+        </p-card>
+    </div>
+    <div class="p-col-12 p-md-6 p-lg-12">
+
+        <p-fullCalendar #calendar [events]="events" [options]="options"></p-fullCalendar>
+
+    </div>
+</div>-->
+
+
+
+<div class="p-grid p-fluid">
+    <div class="p-col-12 p-md-6 p-lg-5">
+        <div class="p-grid p-fluid">
+            <div class="p-col-12 p-md-6 p-lg-12">
+                <p-card subheader="Date & Time">
+                    {{dashboardtime | date:'medium'}}
+                </p-card>
+            </div>
+            <div class="p-col-12 p-md-6 p-lg-12">
+                <p-card subheader="Daily Appointments">
+                    {{dashboard.schedcount}}
+                </p-card>
+            </div>
+            <div class="p-col-12 p-md-6 p-lg-12">
+                <p-card subheader="Daily Transactions">
+                    {{dashboard.txcount}}
+                </p-card>
+            </div>
+            <div class="p-col-12 p-md-6 p-lg-12">
+                <p-card subheader="Patient Record">
+                    {{dashboard.patient}}
+                </p-card>
+            </div>
+            <div class="p-col-12 p-md-6 p-lg-12">
+                <p-card subheader="Registered Users">
+                    {{dashboard.saveduser}}
+                </p-card>
+            </div>
+        </div>
+    </div>
+    <div class="p-col-12 p-md-6 p-lg-7">
+        <div class="p-col-12 p-md-6 p-lg-12">
+            <p-fullCalendar #calendar [events]="events" [options]="options"></p-fullCalendar>
+        </div>
+    </div>
+</div>

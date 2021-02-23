@@ -39,6 +39,16 @@ public class Invoiceitem {
 	private Date datecreated;
 	@Column(name = "createdby")
 	private String createdby;
+	@Column(name = "inventoryid")
+	private Long inventoryid;
+
+	public Long getInventoryid() {
+		return inventoryid;
+	}
+
+	public void setInventoryid(Long inventoryid) {
+		this.inventoryid = inventoryid;
+	}
 
 	public Long getId() {
 		return id;

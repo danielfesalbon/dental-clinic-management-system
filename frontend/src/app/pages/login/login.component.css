@@ -1,0 +1,76 @@
+.navbar {
+    /*background-color: whitesmoke;*/
+    /*background-color: #3dc895;*/
+    height: 10vh;
+    padding-top: 12px;
+    background-color: #99dfdc;
+}
+
+.layout {
+    background-image: linear-gradient(to bottom right, yellowgreen, #3dc895);
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 998;
+}
+
+.nav-shadow {
+    box-shadow: 0 8px 4px -4px rgba(0, 0, 0, 0.2);
+}
+
+.navbar button {
+    float: right;
+}
+
+.login-page {
+    height: 100vh;
+    padding-top: 20vh;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.register-page {
+    height: 100vh;
+    padding-top: calc(5% + 10vh);
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.login-form {
+    /*border-style: solid;
+    border-width: 1px;
+    border-color: white;
+    border-color: rgb(226, 226, 226);
+    background-color: whitesmoke;*/
+    /*background-color: #69cfaa;*/
+    /*background-color: #99dfdc;*/
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+label {
+    text-align: left;
+    float: left;
+}
+
+.register-form {
+    padding-left: 3%;
+    padding-right: 3%;
+    background-color: #99dfdc00;
+}
+
+.dot {
+    opacity: 0%;
+}
+
+.logo {
+    background-color: greenyellow;
+    background-size: contain;
+    border-radius: 10%;
+    height: 150px;
+    width: 150px;
+    margin: auto;
+}

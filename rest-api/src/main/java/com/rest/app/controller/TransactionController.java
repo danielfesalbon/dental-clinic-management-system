@@ -19,9 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rest.app.service.TransactionService;
-import com.rest.app.table.Invoice;
 import com.rest.app.table.Transaction;
-import com.rest.app.table.Useraccount;
 import com.rest.app.util.InvoiceRequest;
 
 /**
@@ -38,8 +36,8 @@ public class TransactionController {
 	private TransactionService transactionService;
 
 	@GetMapping("/list")
-	public List<Useraccount> getTransactionList() {
-		return transactionService.getTransactionList();
+	public List<Transaction> getTransactionList(@RequestParam(required = false, name = "invoiceid") Long invoiceid) {
+		return transactionService.getTransactionList(invoiceid);
 	}
 
 	@PostMapping("/save")
@@ -53,12 +51,13 @@ public class TransactionController {
 	}
 
 	@GetMapping("/invoice/list")
-	public List<Invoice> getInvoiceList() {
-		return transactionService.getInvoiceList();
+	public ResponseEntity<Map<String, Object>> getInvoiceList(@RequestParam(required = false, name = "row") Integer row,
+			@RequestParam(required = false, name = "page") Integer page) {
+		return transactionService.getInvoiceList(row, page);
 	}
 
 	@GetMapping("/invoice/get")
-	public ResponseEntity<InvoiceRequest> getInvoice(@RequestParam(required = false, name = "id") Long id) {
+	public ResponseEntity<Map<String, Object>> getInvoice(@RequestParam(required = false, name = "id") Long id) {
 		return transactionService.getInvoice(id);
 	}
 

@@ -17,6 +17,11 @@ public class InvoiceRequest {
 	private Invoice invoice;
 	private List<Invoiceitem> items;
 
+	@Override
+	public String toString() {
+		return "InvoiceRequest [invoice=" + invoice + ", items=" + items + "]";
+	}
+
 	public Invoice getInvoice() {
 		return invoice;
 	}

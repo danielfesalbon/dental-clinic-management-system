@@ -9,7 +9,7 @@ import java.util.Map;
 import org.springframework.http.ResponseEntity;
 
 import com.rest.app.table.Patient;
-import com.rest.app.util.PatientDetails;
+import com.rest.app.table.Prescription;
 
 /**
  * @author danielf
@@ -17,12 +17,16 @@ import com.rest.app.util.PatientDetails;
  */
 public interface PatientService {
 
-	List<Patient> getPatientList();
+	ResponseEntity<Map<String, Object>> getPatientList(Integer row, Integer page);
 
 	ResponseEntity<Map<String, Object>> savePatient(Patient patient);
 
 	ResponseEntity<Map<String, Object>> updatePatient(Patient patient);
 
-	ResponseEntity<PatientDetails> getPatient(Long id);
+	ResponseEntity<Map<String, Object>> getPatient(Long id, Integer approw, Integer apppage, Integer txrow, Integer txpage, Integer prescrow, Integer prescpage);
+
+	ResponseEntity<Map<String, Object>> makePrescription(Prescription prescription);
+
+	ResponseEntity<Map<String, Object>> uploadPatient(List<Patient> patient);
 
 }

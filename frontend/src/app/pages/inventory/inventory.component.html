@@ -1,0 +1,85 @@
+<p-card>
+    <p-tabView>
+        <p-tabPanel header="Clinic Inventory">
+
+            <p-table [value]="inventory" styleClass="p-datatable-responsive-demo p-datatable-sm">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th class="narrow-col">ID</th>
+                        <th class="average-col">Item Code</th>
+                        <th class="average-col">Item Type</th>
+                        <th class="wide-col">Name</th>
+                        <th class="average-col">Supplier</th>
+                        <th class="narrow-col">Details</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-data>
+                    <tr>
+                        <td class="average-col"><span class="p-column-title">ID</span>{{data.id}}
+                        </td>
+                        <td class="narrow-col"><span class="p-column-title">Item Code</span>{{data.itemcode}}
+                        </td>
+                        <td class="narrow-col"><span class="p-column-title">Item Type</span>{{data.type}}</td>
+                        <td class="wide-col"><span class="p-column-title">Name</span>{{data.name}}</td>
+                        <td class="wide-col"><span class="p-column-title">Supplier</span>{{data.supplier}}
+                        </td>
+
+                        <td class="average-col"><span class="p-column-title">Details</span>
+                            <button pButton pRipple icon="pi pi-external-link" class="p-button-raised p-button-help" (click)="viewinventory(data.id)"></button>
+                        </td>
+
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="summary">
+                    <p-paginator [rows]="row" [totalRecords]="total" [rowsPerPageOptions]="options" (onPageChange)="paginate($event)"></p-paginator>
+                </ng-template>
+            </p-table>
+
+        </p-tabPanel>
+        <p-tabPanel header="Save New Item">
+            <form [formGroup]="item" (ngSubmit)="onSubmit(item.value)" class="p-grid p-fluid">
+                <div class="p-col-12 p-md-6 p-lg-4">
+                    <label for="itemname">Name</label>
+                    <input id="itemname" type="text" pInputText placeholder="Required" formControlName="name">
+                </div>
+
+                <div class="p-col-12 p-md-6 p-lg-4">
+                    <label for="reference">Reference</label>
+                    <input id="reference" type="text" pInputText placeholder="Required" formControlName="itemcode">
+                </div>
+
+                <div class="p-col-12 p-md-6 p-lg-4">
+                    <label for="description">Description</label>
+                    <input id="description" type="text" pInputText formControlName="description">
+                </div>
+
+                <div class="p-col-12 p-md-6 p-lg-2">
+                    <label for="type">Type</label>
+                    <p-dropdown id="type" [options]="typeoptions" formControlName="type" placeholder="Select type" optionLabel="value"></p-dropdown>
+                </div>
+
+
+                <div class="p-col-12 p-md-6 p-lg-2">
+                    <label for="quantity">Quantity</label>
+                    <p-inputNumber id="quantity" formControlName="quantity" placeholder="Required"></p-inputNumber>
+                </div>
+
+                <div class="p-col-12 p-md-6 p-lg-2">
+                    <label for="unitprice">Unit Price</label>
+                    <p-inputNumber formControlName="unitprice" unitprice="minmaxfraction" placeholder="(0.00)Required" mode="decimal" [minFractionDigits]="2" [maxFractionDigits]="5">
+                    </p-inputNumber>
+                </div>
+
+                <div class="p-col-12 p-md-6 p-lg-6">
+                    <label for="supplier">Supplier</label>
+                    <input id="supplier" type="text" pInputText formControlName="supplier">
+                </div>
+
+                <div class="p-col-12 p-md-6 p-lg-12 panel">
+                    <button pButton pRipple label="Save" icon="pi pi-save" type="submit" [disabled]="!item.valid" class="p-button-raised p-button-success submit-button"></button>
+                </div>
+            </form>
+        </p-tabPanel>
+
+    </p-tabView>
+</p-card>

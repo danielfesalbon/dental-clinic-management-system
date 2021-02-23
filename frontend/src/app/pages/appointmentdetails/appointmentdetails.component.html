@@ -1,0 +1,45 @@
+<p-card>
+
+    <form [formGroup]="appointment" (ngSubmit)="onSubmit(appointment.value)" class="p-grid p-fluid">
+        <div class="p-col-12 p-md-6 p-lg-4">
+            <label for="id">Appointment: {{app.id}} </label>
+        </div>
+        <!--<div class="p-col-12 p-md-6 p-lg-8">
+            <label for="schedule">Schedule: {{app.scheddate | date: 'mediumDate'}}, {{app.schedtime}}</label>
+        </div>-->
+        <div class="p-col-12 p-md-6 p-lg-4">
+            <label for="pt">Patient: <b>{{app.ptid}}</b>, {{app.ptfirstname}} {{app.ptlastname}}</label>
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-4">
+            <label for="ptcontact">Contact: {{app.ptcontact}}</label>
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-2">
+            <label for="scheddate">Appointment Date</label>
+            <p-calendar inputId="scheddate" formControlName="scheddate"></p-calendar>
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-2">
+            <label for="schedtime">Appointment Time</label>
+            <!--<p-calendar [timeOnly]="true" inputId="schedtime" formControlName="schedtime"></p-calendar>-->
+            <p-dropdown [options]="timelist" id="schedtime" formControlName="schedtime" placeholder="Select a time" optionLabel="value"></p-dropdown>
+
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-4">
+            <label for="doctor">Doctor In-charge</label>
+            <p-dropdown id="doctor" [options]="users" formControlName="doctor" placeholder="Select a doctor" optionLabel="name">
+            </p-dropdown>
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-4">
+            <label for="binary">Mark as done</label>
+            <br>
+            <p-checkbox formControlName="done" binary="true" inputId="binary"></p-checkbox>
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-12 p-field">
+            <label for="remarks">Notes:</label>
+            <p-editor id="remarks" formControlName="remarks" [style]="{'height':'200px'}"></p-editor>
+        </div>
+
+        <div class="p-col-12 p-md-6 p-lg-12">
+            <button pButton pRipple label="Update" type="submit" [disabled]="!appointment.valid" class="p-button-raised p-button-success submit-button"></button>
+        </div>
+    </form>
+</p-card>

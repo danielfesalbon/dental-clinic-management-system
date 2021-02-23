@@ -1,0 +1,141 @@
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 998;
+    padding-top: 8px;
+    box-shadow: 0 8px 4px -4px rgba(0, 0, 0, 0.2);
+    overflow-x: hidden;
+    background-color: #3dc895;
+}
+
+.header {
+    background-color: whitesmoke;
+    width: 100%;
+    height: 60px;
+}
+
+.layout {
+    margin: 0 0;
+}
+
+.page-route {
+    padding: 0.5em 0.5em;
+    margin-left: 240px;
+}
+
+.padding-page {
+    padding: 16px;
+}
+
+.logout-button {
+    float: right;
+}
+
+.account-button {
+    float: right;
+}
+
+.sidenav {
+    height: 100%;
+    width: 240px;
+    position: fixed;
+    z-index: 1;
+    top: 53px;
+    left: 0;
+    background-color: #99dfdc;
+    overflow-x: hidden;
+}
+
+.sidenav a {
+    padding: 12px 8px 12px 16px;
+    text-decoration: none;
+    font-size: 14px;
+    color: black;
+    display: block;
+    border-bottom: black;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.sidenav div {
+    background-image: linear-gradient(to right, yellowgreen, #3dc895);
+    height: 120px;
+    padding-left: 16px;
+    padding-top: 10px;
+    padding-right: 16px;
+}
+
+.avatar-dp {
+    /*margin: 0 auto;*/
+    width: fit-content;
+}
+
+.profile-btn {
+    right: 0;
+    float: right;
+    margin-left: 5px;
+}
+
+.profile-name {
+    margin-top: 10px;
+    width: 100%;
+}
+
+.app-name {
+    color: whitesmoke;
+    position: absolute;
+    margin-top: 8px;
+    margin-left: 10px;
+}
+
+.app-name b {
+    padding-top: 10px;
+}
+
+@media screen and (max-width: 1100px) {
+    /* width less than 780px */
+    div.sidenav {
+        display: none;
+    }
+    div.page-route {
+        margin-left: 0px;
+        padding-bottom: 80px;
+    }
+    div.bottomnav {
+        display: block;
+    }
+    label.app-name {
+        display: none;
+    }
+}
+
+.bottomnav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 998;
+    padding-top: 8px;
+    overflow-x: hidden;
+    background-color: #99dfdc;
+    display: none;
+}
+
+.bottom-menu {
+    margin-left: 10px;
+}
+
+p-sidebar a {
+    padding: 12px 8px 12px 16px;
+    text-decoration: none;
+    font-size: 14px;
+    color: black;
+    display: block;
+    border-bottom: black;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+}

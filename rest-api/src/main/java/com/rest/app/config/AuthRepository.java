@@ -42,7 +42,9 @@ public class AuthRepository implements UserDetailsService {
 
 		try {
 			Useraccount user = userService.findById(username).get();
+
 			if (user != null) {
+
 				return new User(user.getUsername(), user.getPassword(), !user.getDisabled(), true, true, true,
 						new ArrayList<>());
 			} else {
@@ -55,8 +57,7 @@ public class AuthRepository implements UserDetailsService {
 		return null;
 	}
 
-	@SuppressWarnings("unused")
-	private String getClientIP() {
+	public String getClientIP() {
 		String xfHeader = request.getHeader("X-Forwarded-For");
 		if (xfHeader == null) {
 			return request.getRemoteAddr();

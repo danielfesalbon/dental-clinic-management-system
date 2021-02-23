@@ -1,0 +1,40 @@
+<p-card>
+    <form [formGroup]="inventory" (ngSubmit)="onSubmit(inventory.value)" class="p-grid p-fluid">
+        <div class="p-col-12 p-md-6 p-lg-2">
+            <label for="id">Inventory ID: {{invdetails.id}} </label>
+        </div>
+
+        <div class="p-col-12 p-md-6 p-lg-10">
+            <label for="name">Item Name: {{invdetails.name}}</label>
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-4">
+            <label for="type">Type:</label>
+            <p-dropdown id="type" [options]="typeoptions" formControlName="type" placeholder="Select type" optionLabel="value">
+            </p-dropdown>
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-4">
+            <label for="quantity">Quantity</label>
+            <p-inputNumber id="quantity" formControlName="quantity" [min]="0" placeholder="Required"></p-inputNumber>
+        </div>
+
+        <div class="p-col-12 p-md-6 p-lg-4">
+            <label for="unitprice">Unit Price</label>
+            <p-inputNumber formControlName="unitprice" unitprice="minmaxfraction" placeholder="(0.00)Required" mode="decimal" [minFractionDigits]="2" [maxFractionDigits]="5">
+            </p-inputNumber>
+        </div>
+
+        <div class="p-col-12 p-md-6 p-lg-6">
+            <label for="description">Description</label>
+            <input id="description" type="text" pInputText formControlName="description">
+        </div>
+
+        <div class="p-col-12 p-md-6 p-lg-6">
+            <label for="supplier">Supplier</label>
+            <input id="supplier" type="text" pInputText formControlName="supplier">
+        </div>
+
+        <div class="p-col-12 p-md-6 p-lg-12">
+            <button pButton pRipple label="Update" type="submit" [disabled]="!inventory.valid" class="p-button-raised p-button-success submit-button"></button>
+        </div>
+    </form>
+</p-card>

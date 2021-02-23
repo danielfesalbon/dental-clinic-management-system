@@ -35,4 +35,8 @@ public interface UserService {
 
 	ResponseEntity<Map<String, Object>> signOut(String user);
 
+	ResponseEntity<Map<String, Object>> getUser(String username);
+
+	ResponseEntity<Map<String, Object>> updateUser(Useraccount user);
+
 }

@@ -1,0 +1,181 @@
+<div class="layout">
+    <div id="stloginnav" class="navbar nav-shadow sticky">
+        <!--<button pButton pRipple label="Recover" class="p-button-outlined p-mr-2 p-mb-2" (click)="forgotpassword()"></button>-->
+        <button pButton pRipple label="Sign up" class="p-button-text p-mr-2 p-mb-2" (click)="onreg()"></button>
+        <button pButton pRipple label="Sign in" class="p-mr-2 p-mb-2" (click)="onsign()"></button>
+    </div>
+
+    <div class="register-page" *ngIf="toregister">
+        <div class="p-grid p-fluid">
+            <div class="p-col-12 p-md-6 p-lg-2">
+            </div>
+            <div class="p-col-12 p-md-6 p-lg-8">
+                <form [formGroup]="user" (ngSubmit)="registernew(user.value)" class="box p-grid register-form p-fluid p-shadow-22">
+                    <div class="p-col-12 p-md-6 p-lg-12">
+                        <label for="title">Title</label>
+                        <input id="title" type="text" pInputText formControlName="title">
+                    </div>
+                    <div class="p-col-12 p-md-6 p-lg-6">
+                        <label for="firstname">Firstname</label>
+                        <input id="firstname" type="text" pInputText formControlName="firstname" placeholder="Required">
+                    </div>
+                    <div class="p-col-12 p-md-6 p-lg-6">
+                        <label for="lastname">Lastname</label>
+                        <input id="lastname" type="text" pInputText formControlName="lastname" placeholder="Required">
+                    </div>
+                    <div class="p-col-12 p-md-6 p-lg-6">
+                        <label for="username">Username</label>
+                        <input id="username" type="text" pInputText formControlName="username" placeholder="Required - Length(4-12)">
+                    </div>
+                    <div class="p-col-12 p-md-6 p-lg-6">
+                        <label for="basic">Birthday</label>
+                        <br>
+                        <p-calendar inputId="basic" [monthNavigator]="true" [yearNavigator]="true" yearRange="1970:2030" placeholder="Required" formControlName="birthdate"></p-calendar>
+                    </div>
+                    <div class="p-col-12 p-md-6 p-lg-12">
+                        <label for="password1">Password</label>
+                        <input id="password1" type="password" pPassword formControlName="password" placeholder="Required - Min(8)">
+                    </div>
+                    <div class="p-col-12 p-md-6 p-lg-12">
+                        <label for="password2">Confirm Password</label>
+                        <input id="password2" type="password" pPassword formControlName="password2" placeholder="Required - Min(8)">
+                    </div>
+                    <div class="p-col-12 p-md-6 p-lg-12">
+                        <button id="regButton" pButton pRipple type="submit" label="Save new user" [disabled]="!user.valid" class="p-button-raised p-button-info"></button>
+                    </div>
+                </form>
+            </div>
+            <div class="p-col-12 p-md-6 p-lg-2">
+            </div>
+        </div>
+    </div>
+
+
+    <div class="login-page" *ngIf="tosignin">
+        <div class="p-grid p-fluid">
+            <div class="p-col-12 p-md-6 p-lg-4">
+            </div>
+            <div class="p-col-12 p-md-6 p-lg-4">
+                <form [formGroup]="credentials" (ngSubmit)="usersignin(credentials.value)" class="box login-form p-grid p-fluid p-shadow-22">
+                    <div class="logo"></div>
+                    <div class="p-col-12 p-md-6 p-lg-12">
+                        <label for="username">Username</label>
+                        <input id="username" type="text" pInputText formControlName="username">
+                    </div>
+                    <div class="p-col-12 p-md-6 p-lg-12">
+                        <label for="password">Password</label>
+                        <input id="password" type="password" pInputText formControlName="password">
+                    </div>
+                    <div class="p-col-12 p-md-6 p-lg-12">
+                        <button pButton pRipple type="submit" [disabled]="!credentials.valid" label="Log in" class="p-button-raised p-button-success"></button>
+                    </div>
+                    <div class="p-col-12 p-md-6 p-lg-12">
+                        <button pButton pRipple type="button" label="Forgot Password?" class="p-button-text p-button-info" (click)="forgotpassword()"></button>
+                    </div>
+                </form>
+            </div>
+            <div class="p-col-12 p-md-6 p-lg-4">
+            </div>
+        </div>
+    </div>
+</div>
+<!--<div class="login-page" *ngIf="forgpass">
+    <div class="p-grid p-fluid">
+        <div class="p-col-12 p-md-6 p-lg-3">
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-6">
+            <div class="register-form">
+                <div class="p-grid">
+                    <div class="p-col-12 p-md-6 p-lg-12">
+                        <label for="username">Username</label>
+                        <input id="username" type="text" pInputText [(ngModel)]="user.username">
+                    </div>
+                </div>
+                <div class="p-grid">
+                    <div class="p-col-12 p-md-6 p-lg-6">
+                        <label>Birthday</label>
+                    </div>
+                </div>
+                <div class="p-grid">
+                    <div class="p-col-12 p-md-6 p-lg-12">
+                        <p-calendar inputId="basic" [(ngModel)]="user.bday"></p-calendar>
+                    </div>
+                </div>
+                <div class="p-grid">
+                    <div class="p-col-12 p-md-6 p-lg-8">
+                    </div>
+                    <div class="p-col-12 p-md-6 p-lg-4">
+                        <label for="resetButton" class="dot">.</label>
+                        <button id="resetButton" pButton pRipple type="button" label="Validate" class="p-button-raised p-button-info" (click)="validateresetpass()"></button>
+                    </div>
+                </div>
+                <div class="p-grid">
+                    <div class="p-col-12 p-md-6 p-lg-12">
+                        <label for="password1">New Password</label>
+                        <input [disabled]="!resetpass" id="password1" type="password" pPassword [(ngModel)]="user.password">
+                    </div>
+                </div>
+                <div class="p-grid">
+                    <div class="p-col-12 p-md-6 p-lg-12">
+                        <label for="password2">Confirm New Password</label>
+                        <input [disabled]="!resetpass" id="password2" type="password" pPassword [(ngModel)]="confpassword">
+                    </div>
+                </div>
+                <div class="p-grid">
+                    <div class="p-col-12 p-md-6 p-lg-8">
+                    </div>
+                    <div class="p-col-12 p-md-6 p-lg-4">
+                        <label for="resetButton" class="dot">.</label>
+                        <button [disabled]="!resetpass || confpassword != user.password" id="resetButton" pButton pRipple type="button" label="Reset" class="p-button-raised p-button-info" (click)="resetpassword()"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-3">
+        </div>
+    </div>
+</div>-->
+
+
+<p-confirmDialog key="regconf" [baseZIndex]="10000" rejectButtonStyleClass="p-button-outlined"></p-confirmDialog>
+
+
+
+<p-dialog header="Recover account" [(visible)]="forgpass" [style]="{width: '50vw'}" [baseZIndex]="2" [closable]="false" [modal]="true">
+
+    <form [formGroup]="recovery" (ngSubmit)="validateresetpass(recovery.value)" class="p-grid p-fluid">
+        <div class="p-col-12 p-md-6 p-lg-12">
+            <label for="username">Username</label>
+            <input id="username" type="text" pInputText formControlName="username" placeholder="Required">
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-12">
+            <label for="birthdate">Birthday</label>
+            <br>
+            <p-calendar inputId="birthdate" [monthNavigator]="true" placeholder="Required" [yearNavigator]="true" yearRange="1970:2030" formControlName="birthdate" [touchUI]="true"></p-calendar>
+        </div>
+
+        <div class="p-col-12 p-md-6 p-lg-12">
+            <button pButton pRipple type="submit" label="Validate" [disabled]="!recovery.valid" class="p-button-raised p-button-info"></button>
+        </div>
+    </form>
+
+    <form [formGroup]="reset" (ngSubmit)="resetpassword(reset.value)" class="p-grid p-fluid">
+        <div class="p-col-12 p-md-6 p-lg-12">
+            <label for="password1">New Password</label>
+            <input id="password1" type="password" pPassword formControlName="password" placeholder="Required - Min(8)">
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-12">
+            <label for="password2">Confirm Password</label>
+            <input id="password2" type="password" pPassword formControlName="password2" placeholder="Required - Min(8)">
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-12">
+            <button pButton pRipple type="submit" label="Reset Password" [disabled]="!reset.valid" class="p-button-raised p-button-info"></button>
+        </div>
+    </form>
+
+
+
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-check" (click)="forgpass=false" label="Close" styleClass="p-button-text"></p-button>
+    </ng-template>
+</p-dialog>

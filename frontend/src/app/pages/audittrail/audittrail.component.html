@@ -1,0 +1,23 @@
+<p-card>
+    <p-table [value]="list" styleClass="p-datatable-responsive-demo">
+        <ng-template pTemplate="header">
+            <tr>
+                <th class="narrow-col">USER</th>
+                <th class="wide-col">ACTIVITY</th>
+                <th class="average-col">DATE</th>
+                <th class="average-col">IP ADDRESS</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-data>
+            <tr>
+                <td class="narrow-col"><span class="p-column-title">USER</span>{{data.eventuser}}</td>
+                <td class="wide-col"><span class="p-column-title">ACTIVITY</span>{{data.eventdescription}}</td>
+                <td class="average-col"><span class="p-column-title">DATE</span>{{data.eventdate | date: 'short'}}</td>
+                <td class="average-col"><span class="p-column-title">IP ADDRESS</span>{{data.ipaddress}}</td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <p-paginator [rows]="row" [totalRecords]="total" [rowsPerPageOptions]="options" (onPageChange)="paginate($event)"></p-paginator>
+        </ng-template>
+    </p-table>
+</p-card>

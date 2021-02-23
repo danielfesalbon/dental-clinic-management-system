@@ -1,0 +1,84 @@
+<p-card>
+    <p-tabView>
+        <p-tabPanel header="List of Appointments">
+            <p-table [value]="appointments" styleClass="p-datatable-responsive-demo p-datatable-sm">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th class="narrow-col">ID</th>
+                        <th class="wide-col">Patient</th>
+                        <th class="narrow-col">Date</th>
+                        <th class="narrow-col">Time</th>
+                        <th class="average-col">Contact</th>
+                        <th class="narrow-col">Details</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-data>
+                    <tr>
+                        <td class="narrow-col"><span class="p-column-title">ID</span>{{data.id}}
+                        </td>
+                        <td class="wide-col"><span class="p-column-title">Patient</span>{{data.ptfirstname}} {{data.ptlastname}}
+                        </td>
+                        <td class="narrow-col"><span class="p-column-title">Date</span>{{data.scheddate}}
+                        </td>
+                        <td class="narrow-col"><span class="p-column-title">Time</span>{{data.schedtime}}</td>
+                        <td class="average-col"><span class="p-column-title">Contact</span>{{data.ptcontact}}
+                        </td>
+
+                        <td class="narrow-col"><span class="p-column-title">Details</span>
+                            <button pButton pRipple icon="pi pi-external-link" class="p-button-raised p-button-help" (click)="viewappointmentdetails(data.id)"></button>
+                        </td>
+
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="summary">
+                    <p-paginator [rows]="row" [totalRecords]="total" [rowsPerPageOptions]="options" (onPageChange)="paginate($event)"></p-paginator>
+                </ng-template>
+            </p-table>
+        </p-tabPanel>
+        <p-tabPanel header="Schedule New Appointment">
+
+            <form [formGroup]="appointment" (ngSubmit)="onSubmit(appointment.value)" class="p-grid p-fluid">
+                <div class="p-col-12 p-md-6 p-lg-4">
+                    <label for="patientid">Search Patient</label>
+                    <div class="p-inputgroup">
+                        <input id="patientid" type="text" pInputText placeholder="Patient ID" formControlName="ptid">
+                        <button type="button" pButton pRipple icon="pi pi-search" (click)="searchPatient(appointment.value)"></button>
+                    </div>
+                </div>
+
+                <div class="p-col-12 p-md-6 p-lg-4">
+                    <label for="firstname">Firstname</label>
+                    <input id="firstname" type="text" pInputText placeholder="Required" formControlName="ptfirstname">
+                </div>
+
+                <div class="p-col-12 p-md-6 p-lg-4">
+                    <label for="lastname">Lastname</label>
+                    <input id="lastname" type="text" pInputText placeholder="Required" formControlName="ptlastname">
+                </div>
+
+
+                <div class="p-col-12 p-md-6 p-lg-4">
+                    <label for="contact">Contact</label>
+                    <input id="contact" type="text" pInputText formControlName="contact" placeholder="Required" formControlName="ptcontact">
+                </div>
+
+                <div class="p-col-12 p-md-6 p-lg-4">
+                    <label for="basic">Appointment Date</label>
+                    <p-calendar inputId="basic" formControlName="scheddate"></p-calendar>
+                </div>
+
+                <div class="p-col-12 p-md-6 p-lg-4">
+                    <label for="timeonly">Appointment Time</label>
+                    <p-dropdown [options]="timelist" id="timeonly" formControlName="schedtime" placeholder="Select a time" optionLabel="value"></p-dropdown>
+
+                    <!--<p-calendar [timeOnly]="true" inputId="timeonly" formControlName="schedtime"></p-calendar>-->
+                </div>
+
+                <div class="p-col-12 p-md-6 p-lg-12 panel">
+                    <button pButton pRipple label="Save" icon="pi pi-save" type="submit" [disabled]="!appointment.valid" class="p-button-raised p-button-success submit-button"></button>
+                </div>
+            </form>
+
+        </p-tabPanel>
+    </p-tabView>
+</p-card>

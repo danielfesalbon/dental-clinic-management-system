@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,7 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.rest.app.config.AuthRepository;
 import com.rest.app.repo.AudittrailRepository;
 import com.rest.app.table.Audittrail;
 
@@ -29,6 +31,9 @@ public class EventUtil {
 	@Autowired
 	private AudittrailRepository auditRepository;
 
+	@Autowired
+	private AuthRepository authRepository;
+
 	public void LOG_EVENT(String username, Map<String, Object> res) {
 
 		LocalTime now = LocalTime.now();
@@ -41,6 +46,7 @@ public class EventUtil {
 			audit.setEventdate(new Date());
 			audit.setEventtime(time);
 			audit.setEventdescription((String) res.get("event"));
+			audit.setIpaddress(authRepository.getClientIP());
 			auditRepository.save(audit);
 		}
 	}

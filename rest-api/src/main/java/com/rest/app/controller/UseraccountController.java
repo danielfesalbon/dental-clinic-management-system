@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -45,6 +46,17 @@ public class UseraccountController {
 	@PostMapping("/save")
 	public ResponseEntity<Map<String, Object>> saveUser(@RequestBody Useraccount user) {
 		return userService.saveUser(user);
+	}
+	
+	@PutMapping("/update")
+	public ResponseEntity<Map<String, Object>> updateUser(@RequestBody Useraccount user) {
+		return userService.updateUser(user);
+	}
+
+	@GetMapping("/get")
+	public ResponseEntity<Map<String, Object>> getUser(
+			@RequestParam(required = false, name = "username") String username) {
+		return userService.getUser(username);
 	}
 
 	@DeleteMapping("/delete/{username}")

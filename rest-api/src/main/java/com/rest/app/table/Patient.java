@@ -133,4 +133,11 @@ public class Patient {
 		this.createdby = createdby;
 	}
 
+	@Override
+	public String toString() {
+		return "Patient [id=" + id + ", firstname=" + firstname + ", lastname=" + lastname + ", middlename="
+				+ middlename + ", email=" + email + ", contact=" + contact + ", address=" + address + ", birthdate="
+				+ birthdate + ", gender=" + gender + ", datecreated=" + datecreated + ", createdby=" + createdby + "]";
+	}
+
 }

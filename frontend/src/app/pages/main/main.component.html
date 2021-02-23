@@ -1,0 +1,122 @@
+<div class="layout">
+
+    <div class="sticky">
+        <label class="app-name"> <b> DENTAL CLINIC MANAGEMENT SYSTEM </b></label>
+        <button pButton pRipple label="Logout" icon="pi pi-sign-out" class="p-mr-2 p-mb-2 logout-button" (click)="onlogout()"></button>
+    </div>
+
+    <div class="header">
+
+    </div>
+
+    <div class="sidenav">
+        <div>
+            <section class="avatar-dp">
+                <p-avatar label="{{letter}}" styleClass="p-mr-2" size="xlarge" shape="circle" [style]="{'background-color': '#9c27b0', 'color': '#ffffff'}"></p-avatar>
+            </section>
+            <button pButton pRipple type="button" icon="pi pi-user-edit" class="p-button-rounded profile-btn" (click)="showprofile()" pTooltip="View User Profile" tooltipPosition="bottom"></button>
+            <section class="profile-name">
+                {{user.firstname}} {{user.lastname}}
+            </section>
+        </div>
+        <a routerLink="dashboard"> <i class="pi pi-chart-bar"></i> Dashboard</a>
+        <a routerLink="patient"> <i class="pi pi-users"></i> Patients</a>
+        <a routerLink="users"> <i class="pi pi-user"></i> Staff</a>
+        <a routerLink="appointment"> <i class="pi pi-calendar"></i> Appointments
+        </a>
+        <a routerLink="inventory"> <i class="pi pi-th-large"></i> Inventory</a>
+        <a routerLink="invoice"> <i class="pi pi-folder"></i> Invoice</a>
+        <a routerLink="transaction"> <i class="pi pi-credit-card"></i> Payments</a>
+        <a routerLink="system/activity"> <i class="pi pi-clock"></i> Audit Trail</a>
+        <a routerLink="configuration"> <i class="pi pi-cog"></i> Settings</a>
+    </div>
+
+
+    <div class="page-route">
+        <div class="padding-page">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+
+    <div class="bottomnav">
+        <button pButton icon="pi pi-list" pRipple (click)="bottombar = true" type="button" class="p-button-text bottom-menu"></button>
+
+        <button pButton pRipple label="Account" icon="pi pi-user-edit" (click)="showprofile()" class="p-mr-2 p-mb-2 account-button"></button>
+    </div>
+
+</div>
+
+<p-sidebar (click)="bottombar = false" [(visible)]="bottombar" position="bottom" [baseZIndex]="10000" styleClass="p-sidebar-lg" dismissible="false">
+    <a routerLink="dashboard"> <i class="pi pi-chart-bar"></i> Dashboard</a>
+    <a routerLink="patient"> <i class="pi pi-users"></i> Patients</a>
+    <a routerLink="users"> <i class="pi pi-user"> </i> Staff</a>
+    <a routerLink="appointment"> <i class="pi pi-calendar"></i> Appointments</a>
+    <a routerLink="inventory"> <i class="pi pi-th-large"></i> Inventory</a>
+    <a routerLink="invoice"> <i class="pi pi-folder"></i> Invoice</a>
+    <a routerLink="transaction"> <i class="pi pi-credit-card"></i> Payments</a>
+    <a routerLink="system/activity"> <i class="pi pi-clock"></i> Audit Trail</a>
+    <a routerLink="configuration"> <i class="pi pi-cog"></i> Settings</a>
+</p-sidebar>
+
+
+<p-confirmDialog [baseZIndex]="10000" rejectButtonStyleClass="p-button-outlined"></p-confirmDialog>
+
+<p-dialog header="Hello, {{name}}!" [(visible)]="usermodal" [modal]="true" [position]="position" [style]="{width: '70vw'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false" [closable]="true">
+
+    <form [formGroup]="userform" (ngSubmit)="saveuser(userform.value)" class="p-grid p-fluid">
+        <div class="p-col-12 p-md-6 p-lg-3">
+            <label for="title">Title</label>
+            <input id="title" type="text" pInputText formControlName="title">
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-3">
+            <label for="contact">Contact</label>
+            <input id="contact" type="text" pInputText formControlName="contact" placeholder="Required">
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-3">
+            <label for="email">Email</label>
+            <input id="email" type="text" pInputText formControlName="email">
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-3">
+            <label for="gender">Gender</label>
+            <p-dropdown [options]="genderoptions" formControlName="gender" placeholder="Select a gender" optionLabel="value">
+            </p-dropdown>
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-6">
+            <label for="address">Address</label>
+            <input id="address" type="text" pInputText formControlName="address">
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-3">
+            <label for="birthdate">Birthday</label>
+            <p-calendar inputId="birthdate" formControlName="birthdate" [monthNavigator]="true" [yearNavigator]="true" yearRange="1970:2030" [touchUI]="true"></p-calendar>
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-3">
+            <label for="specialization">Specialization</label>
+            <input id="specialization" type="text" pInputText formControlName="specialization">
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-12">
+            <button pButton pRipple label="Update" type="submit" [disabled]="!userform.valid" class="p-button-raised p-button-success submit-button"></button>
+        </div>
+    </form>
+
+    <div class="p-grid p-fluid">
+        <div class="p-col-12 p-md-6 p-lg-12">
+            <label for="password1">New Password</label>
+            <input id="password1" type="password" pPassword [(ngModel)]="user.password">
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-12">
+            <label for="password2">Confirm New Password</label>
+            <input id="password2" type="password" pPassword [(ngModel)]="confpassword">
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-12">
+            <button (click)="changepassword()" *ngIf="user != undefined && user.password != null && user.password != '' && user.password == confpassword" pButton pRipple type="button" label="Update Password" class="p-button-raised p-button-success"></button>
+        </div>
+
+    </div>
+
+
+    <ng-template pTemplate="footer">
+        <!--<button icon="pi pi-check" (click)="changepassword()" *ngIf="user != undefined && user.password != null && user.password != '' && user.password == confpassword" pButton pRipple type="button" label="Update Password" class="p-button-success"></button>
+        <p-button icon="pi pi-times" pRipple (click)="usermodal=false" label="Close" styleClass="p-button-text">
+        </p-button>-->
+    </ng-template>
+</p-dialog>

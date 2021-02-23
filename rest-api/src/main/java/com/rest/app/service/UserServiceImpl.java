@@ -59,14 +59,19 @@ public class UserServiceImpl implements UserService {
 		Map<String, Object> response = new HashMap<String, Object>();
 
 		try {
-			response.put("event", "Updated " + user.getUsername() + "'s user account details");
-			if (user.getUsername() == null || !user.getUsername().isEmpty()) {
-				response.put("event", "Saved new user account");
+			response.put("event", "Saved new user account");
+			if (!UserRepository.existsById(user.getUsername())) {
+				user.setFirstname(user.getFirstname().toUpperCase());
+				user.setLastname(user.getLastname().toUpperCase());
 				user.setDisabled(true);
 				user.setPassword(passwordEncoder.encode(user.getPassword()));
+				UserRepository.save(user);
+				response.put("flag", "success");
+			} else {
+				response.put("flag", "failed");
+				response.put("event", "Username already exist");
+				return ResponseEntity.badRequest().body(response);
 			}
-			UserRepository.save(user);
-			response.put("flag", "success");
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -207,6 +212,59 @@ public class UserServiceImpl implements UserService {
 		} catch (Exception e) {
 			e.printStackTrace();
 			response.put("flag", "failed");
+			return ResponseEntity.badRequest().body(response);
+			// TODO: handle exception
+		}
+		return ResponseEntity.ok().body(response);
+	}
+
+	@Override
+	public ResponseEntity<Map<String, Object>> getUser(String username) {
+		// TODO Auto-generated method stub
+		Map<String, Object> response = new HashMap<String, Object>();
+		try {
+
+			if (UserRepository.existsById(username)) {
+				response.put("useraccount", UserRepository.findById(username).get());
+			} else {
+				return ResponseEntity.notFound().build();
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.badRequest().body(response);
+			// TODO: handle exception
+		}
+		return ResponseEntity.ok().body(response);
+	}
+
+	@Override
+	public ResponseEntity<Map<String, Object>> updateUser(Useraccount user) {
+		// TODO Auto-generated method stub
+		Map<String, Object> response = new HashMap<String, Object>();
+
+		try {
+
+			if (UserRepository.existsById(user.getUsername())) {
+				Useraccount u = UserRepository.findById(user.getUsername()).get();
+				u.setAddress(user.getAddress());
+				u.setContact(user.getContact());
+				u.setEmail(user.getEmail());
+				u.setTitle(user.getTitle());
+				u.setSpecialization(user.getSpecialization());
+				u.setGender(user.getGender());
+				u.setMiddlename(user.getMiddlename());
+				u.setDisabled(user.getDisabled());
+				UserRepository.save(u);
+				response.put("event", "Update staff details. Staff: " + u.getFirstname() + " " + u.getLastname());
+				response.put("flag", "success");
+			} else {
+				response.put("flag", "failed");
+				return ResponseEntity.notFound().build();
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
 			return ResponseEntity.badRequest().body(response);
 			// TODO: handle exception
 		}

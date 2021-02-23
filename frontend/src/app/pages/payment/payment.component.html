@@ -1,0 +1,44 @@
+<p-card>
+    <form [formGroup]="paymentform" (ngSubmit)="onSubmit(paymentform.value)" class="p-grid p-fluid">
+        <div class="p-col-12 p-md-6 p-lg-4">
+            <label for="invoiceid">Search Invoice</label>
+            <div class="p-inputgroup">
+                <input id="invoiceid" type="text" pInputText placeholder="Invoice ID" formControlName="invoiceid">
+                <button type="button" pButton pRipple icon="pi pi-search" (click)="searchinvoice(paymentform.value)"></button>
+            </div>
+        </div>
+
+        <div class="p-col-12 p-md-6 p-lg-4">
+            <label for="invoiceamount">Invoice Amount</label>
+            <p-inputNumber formControlName="invoiceamount" inputId="invoiceamount" placeholder="Invoice amount" mode="decimal" [minFractionDigits]="2" [maxFractionDigits]="5">
+            </p-inputNumber>
+        </div>
+
+        <div class="p-col-12 p-md-6 p-lg-4">
+            <label for="paidamount">Paid Amount</label>
+            <p-inputNumber formControlName="paidamount" inputId="paidamount" placeholder="Invoice amount" mode="decimal" [minFractionDigits]="2" [maxFractionDigits]="5">
+            </p-inputNumber>
+        </div>
+
+        <div class="p-col-12 p-md-6 p-lg-4">
+            <label for="amount">Payment Amount</label>
+            <p-inputNumber formControlName="amount" inputId="amount" placeholder="(0.00)Required" mode="decimal" [min]="1" [max]="maxpayment" [minFractionDigits]="2" [maxFractionDigits]="5">
+            </p-inputNumber>
+        </div>
+
+        <div class="p-col-12 p-md-6 p-lg-4">
+            <label for="paidby">Paid by</label>
+            <input id="paidby" type="text" pInputText placeholder="Required" formControlName="paidby" />
+        </div>
+
+        <div class="p-col-12 p-md-6 p-lg-4">
+            <label for="receivedby">Received by</label>
+            <input id="receivedby" type="text" pInputText formControlName="receivedby" />
+        </div>
+
+
+        <div class="p-col-12 p-md-6 p-lg-12 panel">
+            <button pButton icon="pi pi-check" pRipple label="Submit" type="submit" [disabled]="!paymentform.valid || !disabled" class="p-button-raised p-button-success submit-button"></button>
+        </div>
+    </form>
+</p-card>

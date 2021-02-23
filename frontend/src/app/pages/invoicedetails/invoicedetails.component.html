@@ -1,0 +1,56 @@
+<p-card>
+    <div class="p-grid p-fluid">
+        <div class="p-col-12 p-md-6 p-lg-6">
+            <label for="id">Invoice ID: {{invoice.id}} </label>
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-6">
+            <label for="name">Issued by: {{invoice.createdby}}, Date Issued: {{invoice.datecreated | date:
+                'shortDate'}}</label>
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-12">
+            <label for="name">Patient ID: {{invoice.ptid}}</label>
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-12">
+            <label for="name">Patient Name: {{invoice.ptname}}</label>
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-6">
+            <label for="name">Patient Contact: {{invoice.ptcontact}}</label>
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-6">
+            <label for="name">Patient Address: {{invoice.ptaddress}}</label>
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-6">
+            <label for="id">Invoice Amount: {{invoice.amount | number : '1.2'}} </label>
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-6">
+            <label for="name">Paid amount: {{invoice.paid | number : '1.2'}}</label>
+        </div>
+    </div>
+
+    <p-table [value]="invoicetx" styleClass="p-datatable-responsive-demo">
+        <ng-template pTemplate="header">
+            <tr>
+                <th class="narrow-col">ID</th>
+                <th class="average-col">Paid by</th>
+                <th class="average-col">Received by</th>
+                <th class="narrow-col">Amount</th>
+                <th class="narrow-col">Date</th>
+                <th class="narrow-col">Receipt</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-data>
+            <tr>
+                <td class="narrow-col"><span class="p-column-title">ID</span>{{data.id}}</td>
+                <td class="average-col"><span class="p-column-title">Paid by</span>{{data.paidby}}</td>
+                <td class="average-col"><span class="p-column-title">Received by</span>{{data.receivedby}}</td>
+                <td class="narrow-col"><span class="p-column-title">Amount</span>{{data.amount | number: '1.2'}}</td>
+                <td class="narrow-col"><span class="p-column-title">Date</span>{{ data.transactiondate | date: 'shortDate' }}
+                </td>
+                <td class="narrow-col"><span class="p-column-title">Receipt</span>
+                    <button pButton pRipple icon="pi pi-download" class="p-button-raised p-button-help" pTooltip="Download receipt"></button>
+                </td>
+
+            </tr>
+        </ng-template>
+    </p-table>
+</p-card>

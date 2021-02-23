@@ -3,7 +3,6 @@
  */
 package com.rest.app.table;
 
-import java.sql.Time;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -26,9 +25,11 @@ public class Appointment {
 	@Column(name = "id")
 	private Long id;
 	@Column(name = "scheddate")
-	private Date scheddate;
+	private String scheddate;
+	// private Date scheddate;
 	@Column(name = "schedtime")
-	private Time schedtime;
+	private String schedtime;
+//	private Time schedtime;
 	@Column(name = "ptid")
 	private Long ptid;
 	@Column(name = "ptfirstname")
@@ -45,6 +46,24 @@ public class Appointment {
 	private Date datecreated;
 	@Column(name = "doctor")
 	private String doctor;
+	@Column(name = "done")
+	private Boolean done;
+
+	@Override
+	public String toString() {
+		return "Appointment [id=" + id + ", scheddate=" + scheddate + ", schedtime=" + schedtime + ", ptid=" + ptid
+				+ ", ptfirstname=" + ptfirstname + ", ptlastname=" + ptlastname + ", ptcontact=" + ptcontact
+				+ ", ptaddress=" + ptaddress + ", remarks=" + remarks + ", datecreated=" + datecreated + ", doctor="
+				+ doctor + ", done=" + done + "]";
+	}
+
+	public Boolean getDone() {
+		return done;
+	}
+
+	public void setDone(Boolean done) {
+		this.done = done;
+	}
 
 	public Long getId() {
 		return id;
@@ -54,19 +73,19 @@ public class Appointment {
 		this.id = id;
 	}
 
-	public Date getScheddate() {
+	public String getScheddate() {
 		return scheddate;
 	}
 
-	public void setScheddate(Date scheddate) {
+	public void setScheddate(String scheddate) {
 		this.scheddate = scheddate;
 	}
 
-	public Time getSchedtime() {
+	public String getSchedtime() {
 		return schedtime;
 	}
 
-	public void setSchedtime(Time schedtime) {
+	public void setSchedtime(String schedtime) {
 		this.schedtime = schedtime;
 	}
 

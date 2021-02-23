@@ -1,0 +1,119 @@
+<p-card>
+    <p-tabView>
+        <p-tabPanel header="Patient Records">
+
+            <p-table [value]="records" styleClass="p-datatable-responsive-demo p-datatable-sm">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th class="narrow-col">Patient ID</th>
+                        <th class="wide-col">Patient Name</th>
+                        <!--<th class="narrow-col">Age</th>-->
+                        <th class="narrow-col">Gender</th>
+                        <th class="narrow-col">Birthday</th>
+                        <th class="narrow-col">Details</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-data>
+                    <tr>
+                        <td class="narrow-col"><span class="p-column-title">Patient ID</span>{{data.id}}
+                        </td>
+                        <td class="wide-col"><span class="p-column-title">Patient Name</span>{{data.firstname}} {{data.lastname}}
+                        </td>
+                        <!--<td class="narrow-col"><span class="p-column-title">Age</span>{{data.id}}</td>-->
+                        <td class="narrow-col"><span class="p-column-title">Gender</span>{{data.gender}}</td>
+                        <td class="narrow-col"><span class="p-column-title">Birthday</span>{{data.birthdate | date: 'shortDate'}}
+                        </td>
+
+                        <td class="narrow-col"><span class="p-column-title">Details</span>
+                            <button pButton pRipple icon="pi pi-external-link" class="p-button-raised p-button-help" (click)="viewpatientdetails(data.id)"></button>
+                        </td>
+
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="summary">
+                    <p-paginator [rows]="row" [totalRecords]="total" [rowsPerPageOptions]="options" (onPageChange)="paginate($event)"></p-paginator>
+                </ng-template>
+            </p-table>
+
+        </p-tabPanel>
+        <p-tabPanel header="Save New Patient">
+            <form [formGroup]="patient" (ngSubmit)="onSubmit(patient.value)" class="p-grid p-fluid">
+                <div class="p-col-12 p-md-6 p-lg-4">
+                    <label for="firstname">Firstname</label>
+                    <input id="firstname" type="text" pInputText formControlName="firstname" placeholder="Required">
+                </div>
+                <div class="p-col-12 p-md-6 p-lg-4">
+                    <label for="lastname">Lastname</label>
+                    <input id="lastname" type="text" pInputText formControlName="lastname" placeholder="Required">
+                </div>
+                <div class="p-col-12 p-md-6 p-lg-4">
+                    <label for="middlename">Middlename</label>
+                    <input id="middlename" type="text" pInputText formControlName="middlename">
+                </div>
+                <div class="p-col-12 p-md-6 p-lg-3">
+                    <label for="contact">Contact</label>
+                    <input id="contact" type="text" pInputText formControlName="contact" placeholder="Required">
+                </div>
+                <div class="p-col-12 p-md-6 p-lg-2">
+                    <label for="basic">Birthday</label>
+                    <p-calendar inputId="basic" formControlName="birthdate" [monthNavigator]="true" [yearNavigator]="true" yearRange="1970:2030"></p-calendar>
+                </div>
+                <div class="p-col-12 p-md-6 p-lg-4">
+                    <label for="emailaddress">Email</label>
+                    <input id="emailaddress" type="text" pInputText formControlName="email" placeholder="email@address.com">
+                </div>
+                <div class="p-col-12 p-md-6 p-lg-3">
+                    <label for="gender">Gender</label>
+                    <p-dropdown [options]="genderoptions" formControlName="gender" placeholder="Select a gender" optionLabel="value"></p-dropdown>
+
+                </div>
+                <div class="p-col-12 p-md-6 p-lg-12">
+                    <label for="address">Address</label>
+                    <input id="address" type="text" pInputText formControlName="address" placeholder="Required">
+                </div>
+                <div class="p-col-12 p-md-6 p-lg-12">
+                    <button pButton pRipple label="Save" icon="pi pi-save" type="submit" [disabled]="!patient.valid" class="p-button-raised p-button-success"></button>
+                </div>
+            </form>
+        </p-tabPanel>
+        <p-tabPanel header="Record Upload">
+            <!--<p-fileUpload mode="basic" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" customUpload="true" [auto]="true" (uploadHandler)="handleFileInput($event)">
+            </p-fileUpload>-->
+
+            <div class="p-grid p-fluid">
+                <div class="p-col-12 p-md-6 p-lg-4">
+                    <input pInputText hidden type="file" id="actual-btn" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" (change)="handleFileInput($event)" class="p-button-secondary">
+                    <label id="upload-label" for="actual-btn" hidden>No file chosenasd</label>
+                    <button icon="pi pi-file-excel" (click)="onBrowse()" pButton pRipple type="button" label="Browse" class="p-button-raised p-button-primary"></button>
+                </div>
+                <div class="p-col-12 p-md-6 p-lg-4">
+                    <button (click)="refresh()" icon="pi pi-refresh" pButton pRipple type="button" label="Reload" class="p-button-raised p-button-info"></button>
+                </div>
+                <div class="p-col-12 p-md-6 p-lg-4">
+                    <button (click)="uploadallpatient()" icon="pi pi-upload" pButton pRipple label="Upload" type="button" [disabled]="patientupload.length < 1" class="p-button-raised p-button-success"></button>
+                </div>
+            </div>
+
+            <p-table [value]="patientupload" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" styleClass="p-datatable-responsive-demo p-datatable-lg">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th class="wide-col">Patient Name</th>
+                        <th class="narrow-col">Gender</th>
+                        <th class="narrow-col">Birthday</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-data>
+                    <tr>
+                        <td class="wide-col"><span class="p-column-title">Patient Name</span>{{data.firstname}} {{data.lastname}}
+                        </td>
+                        <td class="narrow-col"><span class="p-column-title">Gender</span>{{data.gender}}</td>
+                        <td class="narrow-col"><span class="p-column-title">Birthday</span>{{data.birthdate | date: 'shortDate'}}
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+
+
+        </p-tabPanel>
+    </p-tabView>
+</p-card>

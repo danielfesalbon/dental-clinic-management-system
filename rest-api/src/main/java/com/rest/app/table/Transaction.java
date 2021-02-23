@@ -36,6 +36,12 @@ public class Transaction {
 	@Column(name = "paidby")
 	private String paidby;
 
+	@Override
+	public String toString() {
+		return "Transaction [id=" + id + ", invoiceid=" + invoiceid + ", amount=" + amount + ", transactiondate="
+				+ transactiondate + ", receivedby=" + receivedby + ", paidby=" + paidby + "]";
+	}
+
 	public Long getId() {
 		return id;
 	}
