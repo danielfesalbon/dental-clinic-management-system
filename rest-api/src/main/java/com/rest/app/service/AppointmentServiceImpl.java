@@ -112,12 +112,6 @@ public class AppointmentServiceImpl implements AppointmentService {
 
 			if (appointmentRepository.existsById(appointment.getId())) {
 				Appointment a = appointmentRepository.findById(appointment.getId()).get();
-				/*
-				 * LocalDateTime datetime =
-				 * appointment.getSchedtime().toInstant().atZone(ZoneId.systemDefault())
-				 * .toLocalDateTime(); LocalTime now = datetime.toLocalTime(); Time time =
-				 * Time.valueOf(now);
-				 */
 				a.setSchedtime(appointment.getSchedtime());
 				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 				a.setScheddate(dateFormat.format(appointment.getScheddate()));
@@ -129,7 +123,8 @@ public class AppointmentServiceImpl implements AppointmentService {
 				existing.setSchedtime(a.getSchedtime());
 				existing.setDone(false);
 				Example<Appointment> example = Example.of(existing);
-				if (appointmentRepository.count(example) > 0) {
+				if (appointmentRepository.findOne(example).isPresent()
+						&& !appointmentRepository.findOne(example).get().getId().equals(a.getId())) {
 					response.put("event", "Selected time schedule occupied already");
 					response.put("flag", "failed");
 					return ResponseEntity.badRequest().body(response);
