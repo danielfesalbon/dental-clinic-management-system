@@ -25,7 +25,7 @@ public class AuthAttempRepository {
 
 	public AuthAttempRepository() {
 		super();
-		attemptsCache = CacheBuilder.newBuilder().expireAfterWrite(30, TimeUnit.MINUTES)
+		attemptsCache = CacheBuilder.newBuilder().expireAfterWrite(5, TimeUnit.MINUTES)
 				.build(new CacheLoader<String, Integer>() {
 					public Integer load(String key) {
 						return 0;

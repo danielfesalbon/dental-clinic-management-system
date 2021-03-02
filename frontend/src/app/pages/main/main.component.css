@@ -6,7 +6,8 @@
     padding-top: 8px;
     box-shadow: 0 8px 4px -4px rgba(0, 0, 0, 0.2);
     overflow-x: hidden;
-    background-color: #3dc895;
+    /*background-color: #3dc895;*/
+    background-color: rgb(22, 48, 97);
 }
 
 .header {
@@ -45,15 +46,18 @@
     left: 0;
     background-color: #99dfdc;
     overflow-x: hidden;
+    color: white;
 }
 
 .sidenav a {
     padding: 12px 8px 12px 16px;
     text-decoration: none;
     font-size: 14px;
-    color: black;
+    /*color: black;*/
+    color: rgb(22, 48, 97);
     display: block;
-    border-bottom: black;
+    /*border-bottom: black;*/
+    border-bottom: rgb(22, 48, 97);
     border-bottom-width: 1px;
     border-bottom-style: solid;
 }
@@ -63,7 +67,8 @@
 }
 
 .sidenav div {
-    background-image: linear-gradient(to right, yellowgreen, #3dc895);
+    /*background-image: linear-gradient(to right, yellowgreen, #3dc895);*/
+    background-image: linear-gradient(to right, rgb(22, 48, 97), #3dc895);
     height: 120px;
     padding-left: 16px;
     padding-top: 10px;
@@ -133,9 +138,11 @@ p-sidebar a {
     padding: 12px 8px 12px 16px;
     text-decoration: none;
     font-size: 14px;
-    color: black;
+    /*color: black;*/
+    color: rgb(22, 48, 97);
     display: block;
-    border-bottom: black;
+    /*border-bottom: black;*/
+    border-bottom: rgb(22, 48, 97);
     border-bottom-width: 1px;
     border-bottom-style: solid;
 }

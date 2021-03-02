@@ -38,7 +38,7 @@ export class MainComponent implements OnInit {
   ngOnInit(): void {
     this.bottombar = false;
     this.name = '';
-    this.letter = 'U';
+    this.letter = '?';
     this.confpassword = '';
     this.position = 'top';
     this.usermodal = false;

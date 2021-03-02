@@ -7,7 +7,8 @@
 }
 
 .layout {
-    background-image: linear-gradient(to bottom right, yellowgreen, #3dc895);
+    /*background-image: linear-gradient(to bottom right, yellowgreen, #3dc895);*/
+    background-image: linear-gradient(to bottom right, rgb(22, 48, 97), #3dc895);
 }
 
 .sticky {
@@ -37,6 +38,7 @@
     padding-top: calc(5% + 10vh);
     margin-left: 10%;
     margin-right: 10%;
+    color: white;
 }
 
 .login-form {
@@ -67,7 +69,9 @@ label {
 }
 
 .logo {
-    background-color: greenyellow;
+    /*background-color: greenyellow;
+    background-image: url("/assets/DENTAL-LOGO.PNG");*/
+    background-image: url("../../../assets/DENTAL-LOGO.png");
     background-size: contain;
     border-radius: 10%;
     height: 150px;
