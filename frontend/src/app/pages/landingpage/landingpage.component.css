@@ -1,0 +1,212 @@
+.navbar {
+    height: 10vh;
+    padding-top: 12px;
+    transition: 1s;
+    /*background-color: #99dfdc;*/
+}
+
+.layout {
+    background-image: linear-gradient(#99dfdc, #ffffff);
+    height: 100vh;
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 998;
+}
+
+.nav-shadow {
+    box-shadow: 0 8px 4px -4px rgba(0, 0, 0, 0.2);
+}
+
+.navbar button {
+    float: right;
+}
+
+.home-page {
+    height: 100vh;
+}
+
+.services-page {
+    background-image: linear-gradient(#ffffff, #99dfdc);
+    height: 100vh;
+    width: 100%;
+}
+
+.contact-page {
+    background-image: linear-gradient(#99dfdc, rgb(22, 48, 97));
+    height: 100vh;
+    width: 100%;
+}
+
+#top-button {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    z-index: 99;
+    transition: 5s;
+}
+
+#top-button:hover {
+    background-color: #555;
+}
+
+.service-spacer {
+    width: 100%;
+    height: 20vw;
+    padding-top: 10vw;
+    text-align: center;
+    font-size: 5vw;
+    font-weight: bolder;
+    color: rgb(22, 48, 97);
+}
+
+.service-panel {
+    height: 100%;
+    background-image: linear-gradient(#ffffff, whitesmoke);
+    width: 80%;
+    margin: auto;
+    font-size: 1.2vw;
+}
+
+.contact-panel {
+    height: 100%;
+    width: 100%;
+}
+
+#book-button {
+    position: fixed;
+    left: calc(50vw - 100px);
+    bottom: 15vh;
+    z-index: 99;
+    width: 200px;
+    /*width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;*/
+}
+
+@media screen and (max-width: 780px) {
+    /* width less than 780px */
+    #book-button {
+        left: 0;
+        width: 80%;
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+    div.service-spacer {
+        height: 200px;
+        padding-top: 100px;
+        font-size: 7vw;
+    }
+    div.df-labels {
+        display: block;
+        margin: 0 auto;
+        text-align: center;
+        margin-top: 10px;
+    }
+    div.df-label {
+        display: inline;
+        margin: 0 auto;
+        font-size: 2.5vw;
+    }
+    div.logo-panel {
+        padding-top: 25vh;
+    }
+    div.service-panel {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}
+
+.logo-panel {
+    height: 100%;
+}
+
+.df-braces {
+    /*background-image: url("braces/.svg");*/
+    background-image: url("../../../assets/braces.svg");
+    height: 60px;
+    width: 60px;
+    background-size: contain;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    display: block;
+    margin: auto;
+}
+
+.df-whitening {
+    /*background-image: url("braces/.svg");*/
+    background-image: url("../../../assets/tooth.svg");
+    height: 60px;
+    width: 60px;
+    background-size: contain;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    display: block;
+    margin: auto;
+}
+
+.df-more {
+    /*background-image: url("braces/.svg");*/
+    background-image: url("../../../assets/dental-care.svg");
+    height: 60px;
+    width: 60px;
+    background-size: contain;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    display: block;
+    margin: auto;
+}
+
+.df-cleaning {
+    /*background-image: url("braces/.svg");*/
+    background-image: url("../../../assets/feedback.svg");
+    height: 60px;
+    width: 60px;
+    background-size: contain;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    display: block;
+    margin: auto;
+}
+
+.df-label {
+    display: block;
+    margin: auto;
+    text-align: center;
+    margin-top: 10px;
+    color: rgb(22, 48, 97);
+}
+
+.contacts {
+    padding-top: 120px;
+    width: 100%;
+    text-align: center;
+    margin: auto;
+}
+
+.logo {
+    background-color: linear-gradient(#99dfdc, #ffffff);
+    background-image: url("../../../assets/LOGO2.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    border-radius: 10%;
+    height: 100%;
+    margin: 0, auto;
+    background-position-x: center;
+}

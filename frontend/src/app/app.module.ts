@@ -60,6 +60,10 @@ import { EditorModule } from 'primeng/editor';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
+import { ScrollTopModule } from 'primeng/scrolltop';
+import { GMapModule } from 'primeng/gmap';
+
+
 
 
 import { LoginComponent } from './pages/login/login.component';
@@ -81,6 +85,7 @@ import { InventorydetailsComponent } from './pages/inventorydetails/inventorydet
 import { InvoicedetailsComponent } from './pages/invoicedetails/invoicedetails.component';
 import { FullCalendarModule } from 'primeng/fullcalendar';
 import { SiteComponent } from './pages/site/site.component';
+import { LandingpageComponent } from './pages/landingpage/landingpage.component';
 
 
 @NgModule({
@@ -104,10 +109,12 @@ import { SiteComponent } from './pages/site/site.component';
     InventorydetailsComponent,
     InvoicedetailsComponent,
     SiteComponent,
+    LandingpageComponent,
   ],
   imports: [
     RippleModule,
     FullCalendarModule,
+    GMapModule,
     TabViewModule,
     KeyFilterModule,
     DataViewModule,

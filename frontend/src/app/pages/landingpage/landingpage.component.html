@@ -1,0 +1,145 @@
+<div class="layout">
+    <div id="stloginnav" class="navbar sticky">
+        <button pButton pRipple label="Contact" class="p-button-text p-mr-2 p-mb-2" (click)="scroll('contact')"></button>
+        <button pButton pRipple label="Services" class="p-button-text p-mr-2 p-mb-2" (click)="scroll('services')"></button>
+    </div>
+
+    <div class="home-page">
+        <div class="logo-panel">
+            <div class="logo"></div>
+        </div>
+    </div>
+    <div id="services" class="services-page">
+        <div class="service-panel">
+            <div class="service-spacer">OUR SERVICES</div>
+            <div class="p-grid p-fluid">
+                <div class="p-col-12 p-md-6 p-lg-3">
+                    <i class="df-cleaning"></i>
+                    <div class="df-labels">
+                        <div class="df-label"> CHECK-UP, </div>
+                        <div class="df-label"> DENTAL CLEANING, </div>
+                        <div class="df-label"> FLOURIED TREATMENT, </div>
+                        <div class="df-label"> TOOTH FILLING </div>
+                    </div>
+                </div>
+                <div class="p-col-12 p-md-6 p-lg-3">
+                    <i class="df-braces"></i>
+                    <div class="df-labels">
+                        <div class="df-label"> BRACES, </div>
+                        <div class="df-label"> INVISALIGN, </div>
+                        <div class="df-label"> DENTURES, </div>
+                        <div class="df-label"> VEENERS </div>
+                    </div>
+                </div>
+                <div class="p-col-12 p-md-6 p-lg-3">
+                    <i class="df-whitening"></i>
+                    <div class="df-labels">
+                        <div class="df-label"> GINGIVOPLASTY, </div>
+                        <div class="df-label"> DENTAL CROWNS, </div>
+                        <div class="df-label"> DENTAL IMPLANT, </div>
+                        <div class="df-label"> FIXED BRIDGES </div>
+                    </div>
+                </div>
+                <div class="p-col-12 p-md-6 p-lg-3">
+                    <i class="df-more"></i>
+                    <div class="df-labels">
+                        <div class="df-label"> INVISALIGN, </div>
+                        <div class="df-label"> ROOT CANAL TREATMENT, </div>
+                        <div class="df-label"> WISDOM TOOTH REMOVAL, </div>
+                        <div class="df-label"> TOOTH EXTRACTION </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="contact" class="contact-page">
+
+        <div class="contact-panel p-grid p-fluid">
+            <div class="p-col-12 p-md-6 p-lg-4"></div>
+            <div class="p-col-12 p-md-6 p-lg-4">
+                <div class="contacts">
+                    <div>
+                        <button pButton pRipple type="button" label="CONTACT US" icon="pi pi-phone" class="p-button-rounded p-button-info"></button>
+                    </div>
+                    <br>
+                    <div>(Smart) 09123456789 </div>
+                    <br>
+                    <div>(Globe) 09123456789 </div>
+                    <br>
+                    <div>
+                        <button pButton pRipple type="button" label="EMAIL" icon="pi pi-send" class="p-button-rounded p-button-info"></button>
+
+                    </div>
+                    <br>
+                    <div>email@gmail.com</div>
+                    <br>
+                    <div>
+                        <button pButton pRipple type="button" label="CLINIC ADDRESS" icon="pi pi-map-marker" class="p-button-rounded p-button-info"></button>
+
+                    </div>
+                    <br>
+                    <div>123, Street, Barangay, City</div>
+                </div>
+            </div>
+            <div class="p-col-12 p-md-6 p-lg-4"></div>
+
+            <!--<div class="p-col-12 p-md-6 p-lg-6">
+                <div>
+                    <div>Clinic Address:</div>
+                    <br>
+                    <div>123, Street, Barangay, City</div>
+                    <br>
+                    <p-gmap #gmap [style]="{'width':'100%','height':'320px', 'margin-bottom': '1em'}" [options]="options" [overlays]="overlays" (onMapClick)="handleMapClick($event)" (onOverlayClick)="handleOverlayClick($event)" (onOverlayDragEnd)="handleDragEnd($event)">
+                    </p-gmap>
+                </div>-->
+        </div>
+    </div>
+    <button id="book-button" pButton pRipple type="button" label="Book a visit" icon="pi pi-calendar" (click)="newappointment()" class="p-button-rounded p-button-raised p-button-help"></button>
+
+    <button pButton id="top-button" pRipple type="button" icon="pi pi-angle-up" class="p-button-rounded  p-button-info" (click)="toTop()"></button>
+
+</div>
+
+
+<p-dialog header="Schedule an appointment" [(visible)]="appmodal" [modal]="true" [style]="{width: '80vw'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+    <form [formGroup]="appointment" (ngSubmit)="onSubmit(appointment.value)" class="p-grid p-fluid">
+        <div class="p-col-12 p-md-6 p-lg-12">
+            <label for="patientid">Search Patient (for patients with existing record)</label>
+            <div class="p-inputgroup">
+                <input id="patientid" type="text" pInputText placeholder="Patient ID" formControlName="ptid">
+                <button type="button" pButton pRipple icon="pi pi-search" (click)="searchPatient(appointment.value)"></button>
+            </div>
+        </div>
+
+        <div class="p-col-12 p-md-6 p-lg-12">
+            <label for="firstname">Firstname</label>
+            <input id="firstname" type="text" pInputText placeholder="Required" formControlName="ptfirstname">
+        </div>
+
+        <div class="p-col-12 p-md-6 p-lg-12">
+            <label for="lastname">Lastname</label>
+            <input id="lastname" type="text" pInputText placeholder="Required" formControlName="ptlastname">
+        </div>
+
+
+        <div class="p-col-12 p-md-6 p-lg-12">
+            <label for="contact">Contact</label>
+            <input id="contact" type="text" pInputText formControlName="contact" placeholder="Required" formControlName="ptcontact">
+        </div>
+
+        <div class="p-col-12 p-md-6 p-lg-12">
+            <label for="basic">Appointment Date</label>
+            <p-calendar inputId="basic" formControlName="scheddate" [touchUI]="true"></p-calendar>
+        </div>
+
+        <div class="p-col-12 p-md-6 p-lg-12">
+            <label for="timeonly">Appointment Time</label>
+            <p-dropdown [options]="timelist" id="timeonly" formControlName="schedtime" placeholder="Select a time" optionLabel="value"></p-dropdown>
+        </div>
+    </form>
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Book" icon="pi pi-check" type="submit" [disabled]="!appointment.valid" class="p-button-raised p-button-success submit-button"></button>
+        <p-button icon="pi pi-times" (click)="appmodal=false" label="Close" styleClass="p-button-text"></p-button>
+    </ng-template>
+</p-dialog>

@@ -75,7 +75,7 @@ export class BackendService {
     return this.http.get<any>(this.servicelink + '/patient/list?row=' + row + '&page=' + page);
   }
 
-  getpatient(id, approw, apppage, txrow, txpage, prescrow, prescpage) {
+  getpatient(id, approw = null, apppage = null, txrow = null, txpage = null, prescrow = null, prescpage = null) {
     return this.http.get<any>(this.servicelink + '/patient/get?id=' + id
       + '&approw=' + approw
       + '&apppage=' + apppage

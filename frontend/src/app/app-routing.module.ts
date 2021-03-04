@@ -9,6 +9,7 @@ import { InventoryComponent } from './pages/inventory/inventory.component';
 import { InventorydetailsComponent } from './pages/inventorydetails/inventorydetails.component';
 import { InvoiceComponent } from './pages/invoice/invoice.component';
 import { InvoicedetailsComponent } from './pages/invoicedetails/invoicedetails.component';
+import { LandingpageComponent } from './pages/landingpage/landingpage.component';
 import { LoginComponent } from './pages/login/login.component';
 import { MainComponent } from './pages/main/main.component';
 import { PatientComponent } from './pages/patient/patient.component';
@@ -19,7 +20,7 @@ import { AuthguardService } from './service/authguard.service';
 
 const routes: Routes = [
   { path: 'back-office/login', component: LoginComponent },
-  { path: '', redirectTo: 'back-office/main', pathMatch: 'full' },
+  { path: '', component: LandingpageComponent },
   {
     path: 'back-office/main',
     component: MainComponent,
