@@ -86,6 +86,13 @@ export class BackendService {
     );
   }
 
+  getpatientbyname(id, firstname, lastname) {
+    return this.http.get<any>(this.servicelink + '/patient/get/public?id=' + id
+      + '&firstname=' + firstname
+      + '&lastname=' + lastname
+    );
+  }
+
   saveappointment(appointment) {
     return this.http.post<any>(this.servicelink + '/appointment/save', appointment);
   }
@@ -165,6 +172,31 @@ export class BackendService {
 
   saveallpatient(patients) {
     return this.http.post<any>(this.servicelink + '/patient/upload', patients);
+  }
+
+
+  getdentaldetails() {
+    return this.http.get<any>(this.servicelink + '/service/dental-details');
+  }
+
+  updatedentaldetails(details) {
+    return this.http.put<any>(this.servicelink + '/service/dental/update', details);
+  }
+
+  getservicelist(row, page) {
+    return this.http.get<any>(this.servicelink + '/service/list?row=' + row + '&page=' + page);
+  }
+
+  getallservicelist() {
+    return this.http.get<any>(this.servicelink + '/service/list/all');
+  }
+
+  saveservice(service) {
+    return this.http.post<any>(this.servicelink + '/service/save', service);
+  }
+
+  deleteservice(serviceid) {
+    return this.http.delete<any>(this.servicelink + '/service/delete/' + serviceid);
   }
 
 }

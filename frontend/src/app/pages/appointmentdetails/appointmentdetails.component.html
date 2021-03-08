@@ -28,7 +28,12 @@
             <p-dropdown id="doctor" [options]="users" formControlName="doctor" placeholder="Select a doctor" optionLabel="name">
             </p-dropdown>
         </div>
-        <div class="p-col-12 p-md-6 p-lg-4">
+        <div class="p-col-12 p-md-6 p-lg-3">
+            <label for="service">Service</label>
+            <p-dropdown id="service" [options]="services" formControlName="service" placeholder="Select a service" optionLabel="name">
+            </p-dropdown>
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-1">
             <label for="binary">Mark as done</label>
             <br>
             <p-checkbox formControlName="done" binary="true" inputId="binary"></p-checkbox>

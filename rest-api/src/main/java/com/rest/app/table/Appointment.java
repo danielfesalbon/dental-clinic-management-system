@@ -48,6 +48,16 @@ public class Appointment {
 	private String doctor;
 	@Column(name = "done")
 	private Boolean done;
+	@Column(name = "service")
+	private String service;
+
+	public String getService() {
+		return service;
+	}
+
+	public void setService(String service) {
+		this.service = service;
+	}
 
 	@Override
 	public String toString() {

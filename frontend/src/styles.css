@@ -63,3 +63,7 @@ html {
 ::-webkit-scrollbar-thumb:hover {
     background-color: #99dfdc;
 }
+
+.all-caps {
+    text-transform: uppercase;
+}

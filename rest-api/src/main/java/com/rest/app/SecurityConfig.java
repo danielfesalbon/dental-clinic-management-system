@@ -59,6 +59,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		// http.authorizeRequests().anyRequest().permitAll().and().csrf().disable();
 
 		http.cors().and().csrf().disable().authorizeRequests().antMatchers("/authenticate/user").permitAll()
+				.antMatchers("/appointment/save").permitAll().antMatchers("/patient/get/public").permitAll()
+				.antMatchers("/service/list/all").permitAll().antMatchers("/service/dental-details").permitAll()
 				.antMatchers("/user/reset/password").permitAll().antMatchers("/user/validate/reset").permitAll()
 				.antMatchers("/file/receipt").permitAll().antMatchers("/file/generate").permitAll()
 				.antMatchers("/user/save").permitAll().anyRequest().authenticated().and().exceptionHandling()

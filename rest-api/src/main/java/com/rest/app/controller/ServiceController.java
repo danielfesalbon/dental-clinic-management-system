@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -40,15 +41,20 @@ public class ServiceController {
 			@RequestParam(required = false, name = "page") Integer page) {
 		return dentalService.getServiceList(row, page);
 	}
+	
+	@GetMapping("/list/all")
+	public ResponseEntity<Map<String, Object>> getServiceListAll() {
+		return dentalService.getServiceListAll();
+	}
 
 	@PostMapping("/save")
 	public ResponseEntity<Map<String, Object>> saveService(@RequestBody Services service) {
 		return dentalService.saveService(service);
 	}
 
-	@DeleteMapping("/delete")
-	public ResponseEntity<Map<String, Object>> deleteService(@RequestBody Services service) {
-		return dentalService.deleteService(service);
+	@DeleteMapping("/delete/{id}")
+	public ResponseEntity<Map<String, Object>> deleteService(@PathVariable Long id) {
+		return dentalService.deleteService(id);
 	}
 
 	@GetMapping("/dental-details")

@@ -1,0 +1,51 @@
+<p-card>
+    <p-tabView>
+        <p-tabPanel header="Services">
+            <p-table [value]="services" styleClass="p-datatable-responsive-demo p-datatable-sm">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th class="narrow-col">ID</th>
+                        <th class="wide-col">Name</th>
+                        <th class="narrow-col">Date Added</th>
+                        <th class="average-col">Added By</th>
+                        <th class="narrow-col">Action</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-data>
+                    <tr>
+                        <td class="narrow-col"><span class="p-column-title">ID</span>{{data.id}}
+                        </td>
+                        <td class="wide-col"><span class="p-column-title">Name</span>{{data.name}}
+                        </td>
+                        <td class="narrow-col"><span class="p-column-title">Date Added</span>{{data.dateadded | date: 'mediumDate'}}
+                        </td>
+                        <td class="narrow-col"><span class="p-column-title">Added By</span>{{data.addedby}}</td>
+
+                        <td class="narrow-col"><span class="p-column-title">Action</span>
+                            <button pButton pRipple icon="pi pi-trash" class="p-button-raised p-button-help" (click)="deleteservice(data.id)"></button>
+                        </td>
+
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="summary">
+                    <p-paginator [rows]="row" [totalRecords]="total" [rowsPerPageOptions]="options" (onPageChange)="paginate($event)"></p-paginator>
+                </ng-template>
+            </p-table>
+        </p-tabPanel>
+        <p-tabPanel header="Add New Service">
+
+            <form [formGroup]="servicefrm" (ngSubmit)="onSubmit(servicefrm.value)" class="p-grid p-fluid">
+
+                <div class="p-col-12 p-md-6 p-lg-12">
+                    <label for="name">Name</label>
+                    <input id="name" type="text" pInputText placeholder="Required" formControlName="name" class="all-caps">
+                </div>
+
+                <div class="p-col-12 p-md-6 p-lg-12">
+                    <button pButton pRipple label="Save" icon="pi pi-save" type="submit" [disabled]="!servicefrm.valid" class="p-button-raised p-button-success submit-button"></button>
+                </div>
+            </form>
+
+        </p-tabPanel>
+    </p-tabView>
+</p-card>

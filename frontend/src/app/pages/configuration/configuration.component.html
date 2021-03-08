@@ -18,23 +18,30 @@
         <div class="p-col-12 p-md-6 p-lg-9">
             : {{prop.app_port}}
         </div>
-        <!--<div class="p-col-12 p-md-6 p-lg-3">
-            Database Username
-        </div>
-        <div class="p-col-12 p-md-6 p-lg-9">
-            : {{prop.db_user}}
-        </div>
-        <div class="p-col-12 p-md-6 p-lg-3">
-            Database Password
-        </div>
-        <div class="p-col-12 p-md-6 p-lg-9">
-            : {{prop.db_password}}
-        </div>-->
         <div class="p-col-12 p-md-6 p-lg-3">
             Connection URL
         </div>
         <div class="p-col-12 p-md-6 p-lg-9">
             : {{prop.db_url}}
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-4">
+            <label for="contact1">Contact #1</label>
+            <input id="contact1" type="text" pInputText [(ngModel)]="details.contact1" placeholder="Contact #1">
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-4">
+            <label for="contact2">Contact #2</label>
+            <input id="contact2" type="text" pInputText [(ngModel)]="details.contact2" placeholder="Contact #2">
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-4">
+            <label for="email">Email</label>
+            <input id="email" type="text" pInputText [(ngModel)]="details.email" placeholder="Email">
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-12">
+            <label for="address">Clinic Address</label>
+            <input id="address" type="text" pInputText [(ngModel)]="details.address" placeholder="Address">
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-12">
+            <button pButton pRipple label="Save" icon="pi pi-save" (click)="savedetails()" class="p-button-raised p-button-success"></button>
         </div>
     </div>
 </p-panel>

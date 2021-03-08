@@ -20,10 +20,12 @@ public interface DentalService {
 
 	ResponseEntity<Map<String, Object>> saveService(Services service);
 
-	ResponseEntity<Map<String, Object>> deleteService(Services service);
+	ResponseEntity<Map<String, Object>> deleteService(Long id);
 
 	ResponseEntity<Map<String, Object>> getDentalDetails();
 
 	ResponseEntity<Map<String, Object>> updateDental(Dental dental);
+
+	ResponseEntity<Map<String, Object>> getServiceListAll();
 
 }

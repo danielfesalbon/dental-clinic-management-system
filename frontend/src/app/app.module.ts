@@ -86,6 +86,7 @@ import { InvoicedetailsComponent } from './pages/invoicedetails/invoicedetails.c
 import { FullCalendarModule } from 'primeng/fullcalendar';
 import { SiteComponent } from './pages/site/site.component';
 import { LandingpageComponent } from './pages/landingpage/landingpage.component';
+import { ServicesComponent } from './pages/services/services.component';
 
 
 @NgModule({
@@ -110,6 +111,7 @@ import { LandingpageComponent } from './pages/landingpage/landingpage.component'
     InvoicedetailsComponent,
     SiteComponent,
     LandingpageComponent,
+    ServicesComponent,
   ],
   imports: [
     RippleModule,

@@ -15,6 +15,7 @@ import { MainComponent } from './pages/main/main.component';
 import { PatientComponent } from './pages/patient/patient.component';
 import { PaymentComponent } from './pages/payment/payment.component';
 import { RecordsComponent } from './pages/records/records.component';
+import { ServicesComponent } from './pages/services/services.component';
 import { UseraccountComponent } from './pages/useraccount/useraccount.component';
 import { AuthguardService } from './service/authguard.service';
 
@@ -27,6 +28,7 @@ const routes: Routes = [
     canActivate: [AuthguardService],
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      { path: 'services', component: ServicesComponent },
       { path: 'dashboard', component: DashboardComponent },
       { path: 'patient', component: RecordsComponent },
       { path: 'patient/:id', component: PatientComponent },

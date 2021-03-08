@@ -61,6 +61,7 @@ public class DentalServiceImpl implements DentalService {
 		try {
 			response.put("event", "Saved new service");
 			service.setDateadded(new Date());
+			service.setName(service.getName().toUpperCase());
 			serviceRepository.save(service);
 			response.put("event", "Saved new service: " + service.getName());
 			response.put("flag", "success");
@@ -77,15 +78,15 @@ public class DentalServiceImpl implements DentalService {
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	public ResponseEntity<Map<String, Object>> deleteService(Services service) {
+	public ResponseEntity<Map<String, Object>> deleteService(Long id) {
 		// TODO Auto-generated method stub
 		Map<String, Object> response = new HashMap<String, Object>();
 
 		try {
-			Services s = serviceRepository.findById(service.getId()).get();
+			Services s = serviceRepository.findById(id).get();
 			if (s != null) {
 				serviceRepository.delete(s);
-				response.put("event", "Service " + service.getName() + " deleted");
+				response.put("event", "Service " + s.getName() + " deleted");
 				response.put("flag", "success");
 			} else {
 				response.put("flag", "failed");
@@ -108,7 +109,7 @@ public class DentalServiceImpl implements DentalService {
 
 		try {
 
-			response.put("details", dentalRepository.getOne((long) 1));
+			response.put("details", dentalRepository.findById((long) 1));
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -132,6 +133,22 @@ public class DentalServiceImpl implements DentalService {
 		} catch (Exception e) {
 			e.printStackTrace();
 			response.put("flag", "failed");
+			return ResponseEntity.badRequest().body(response);
+			// TODO: handle exception
+		}
+		return ResponseEntity.ok().body(response);
+	}
+
+	@Override
+	public ResponseEntity<Map<String, Object>> getServiceListAll() {
+		// TODO Auto-generated method stub
+		Map<String, Object> response = new HashMap<String, Object>();
+		try {
+
+			response.put("services", serviceRepository.findAll());
+
+		} catch (Exception e) {
+			e.printStackTrace();
 			return ResponseEntity.badRequest().body(response);
 			// TODO: handle exception
 		}

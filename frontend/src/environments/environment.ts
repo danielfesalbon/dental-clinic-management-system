@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  rest_url: 'http://dental-service.ap-southeast-1.elasticbeanstalk.com'
+  rest_url: 'http://localhost:5000'
 };
 
 /*

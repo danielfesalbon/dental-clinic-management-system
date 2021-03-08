@@ -45,7 +45,7 @@ public class PatientController {
 	public ResponseEntity<Map<String, Object>> savePatient(@RequestBody Patient patient) {
 		return patientService.savePatient(patient);
 	}
-	
+
 	@PostMapping("/upload")
 	public ResponseEntity<Map<String, Object>> uploadPatient(@RequestBody List<Patient> patient) {
 		return patientService.uploadPatient(patient);
@@ -65,6 +65,13 @@ public class PatientController {
 			@RequestParam(required = false, name = "prescrow") Integer prescrow,
 			@RequestParam(required = false, name = "prescpage") Integer prescpage) {
 		return patientService.getPatient(id, approw, apppage, txrow, txpage, prescrow, prescpage);
+	}
+
+	@GetMapping("/get/public")
+	public ResponseEntity<Map<String, Object>> getPatientByName(@RequestParam(required = false, name = "id") Long id,
+			@RequestParam(required = false, name = "firstname") String firstname,
+			@RequestParam(required = false, name = "lastname") String lastname) {
+		return patientService.getPatientByName(id, firstname, lastname);
 	}
 
 	@PostMapping("/prescription/save")

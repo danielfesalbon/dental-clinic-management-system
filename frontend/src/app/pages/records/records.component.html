@@ -40,15 +40,15 @@
             <form [formGroup]="patient" (ngSubmit)="onSubmit(patient.value)" class="p-grid p-fluid">
                 <div class="p-col-12 p-md-6 p-lg-4">
                     <label for="firstname">Firstname</label>
-                    <input id="firstname" type="text" pInputText formControlName="firstname" placeholder="Required">
+                    <input id="firstname" type="text" pInputText formControlName="firstname" placeholder="Required" class="all-caps">
                 </div>
                 <div class="p-col-12 p-md-6 p-lg-4">
                     <label for="lastname">Lastname</label>
-                    <input id="lastname" type="text" pInputText formControlName="lastname" placeholder="Required">
+                    <input id="lastname" type="text" pInputText formControlName="lastname" placeholder="Required" class="all-caps">
                 </div>
                 <div class="p-col-12 p-md-6 p-lg-4">
                     <label for="middlename">Middlename</label>
-                    <input id="middlename" type="text" pInputText formControlName="middlename">
+                    <input id="middlename" type="text" pInputText formControlName="middlename" class="all-caps">
                 </div>
                 <div class="p-col-12 p-md-6 p-lg-3">
                     <label for="contact">Contact</label>

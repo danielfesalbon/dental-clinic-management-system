@@ -27,6 +27,7 @@ export class AppointmentdetailsComponent implements OnInit {
   app: any;
   users: any[];
   text1: any;
+  services: any[];
 
   timelist: any[];
 
@@ -40,8 +41,10 @@ export class AppointmentdetailsComponent implements OnInit {
       remarks: new FormControl(),
       doctor: new FormControl('', Validators.required),
       done: new FormControl(false, Validators.required),
+      service: new FormControl(''),
     });
-    this.getusers();
+    //this.getusers();
+    this.getservices();
   }
 
   settimelist() {
@@ -56,6 +59,15 @@ export class AppointmentdetailsComponent implements OnInit {
       hrs = hrs + ':00 ' + meridiem;
       this.timelist.push({ value: hrs });
     }
+  }
+
+  getservices() {
+    this.service.getallservicelist().subscribe(res => {
+      this.services = res.services;
+      this.getusers();
+    }, err => {
+      this.tokenService.checkSession(err);
+    });
   }
 
 
@@ -83,10 +95,14 @@ export class AppointmentdetailsComponent implements OnInit {
         //let timestamp = new Date(Date.parse('Thu, 01 Jan 1970 ' + this.app.schedtime));
         let timestamp = this.timelist.find(i => i.value == this.app.schedtime);
         let doc = this.users.find(i => i.username == this.app.doctor);
+        let s = this.services.find(i => i.name == this.app.service);
         if (doc == undefined || doc == null) {
           doc = '';
         }
-        this.appointment.setValue({ scheddate: new Date(this.app.scheddate), schedtime: timestamp, doctor: doc, remarks: this.app.remarks, done: this.app.done });
+        if (s == undefined || s == null) {
+          s = '';
+        }
+        this.appointment.setValue({ scheddate: new Date(this.app.scheddate), schedtime: timestamp, doctor: doc, remarks: this.app.remarks, done: this.app.done, service: s });
       }, err => {
         this.tokenService.checkSession(err);
       });
@@ -98,11 +114,13 @@ export class AppointmentdetailsComponent implements OnInit {
   onSubmit(value: string) {
     let a: any = JSON.parse(JSON.stringify(value));
     a.doctor = a.doctor.username;
+    a.service = a.service.name;
     this.app.doctor = a.doctor;
     this.app.scheddate = a.scheddate;
     this.app.schedtime = a.schedtime.value;
     this.app.remarks = a.remarks;
     this.app.done = a.done;
+    this.app.service = a.service;
     this.confirmationService.confirm({
       message: 'Update appointment details',
       accept: () => {

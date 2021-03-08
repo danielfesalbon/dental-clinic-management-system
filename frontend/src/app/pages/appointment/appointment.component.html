@@ -48,12 +48,12 @@
 
                 <div class="p-col-12 p-md-6 p-lg-4">
                     <label for="firstname">Firstname</label>
-                    <input id="firstname" type="text" pInputText placeholder="Required" formControlName="ptfirstname">
+                    <input id="firstname" type="text" pInputText placeholder="Required" formControlName="ptfirstname" class="all-caps">
                 </div>
 
                 <div class="p-col-12 p-md-6 p-lg-4">
                     <label for="lastname">Lastname</label>
-                    <input id="lastname" type="text" pInputText placeholder="Required" formControlName="ptlastname">
+                    <input id="lastname" type="text" pInputText placeholder="Required" formControlName="ptlastname" class="all-caps">
                 </div>
 
 
@@ -62,16 +62,21 @@
                     <input id="contact" type="text" pInputText formControlName="contact" placeholder="Required" formControlName="ptcontact">
                 </div>
 
-                <div class="p-col-12 p-md-6 p-lg-4">
+                <div class="p-col-12 p-md-6 p-lg-2">
                     <label for="basic">Appointment Date</label>
                     <p-calendar inputId="basic" formControlName="scheddate"></p-calendar>
                 </div>
 
-                <div class="p-col-12 p-md-6 p-lg-4">
+                <div class="p-col-12 p-md-6 p-lg-2">
                     <label for="timeonly">Appointment Time</label>
                     <p-dropdown [options]="timelist" id="timeonly" formControlName="schedtime" placeholder="Select a time" optionLabel="value"></p-dropdown>
 
                     <!--<p-calendar [timeOnly]="true" inputId="timeonly" formControlName="schedtime"></p-calendar>-->
+                </div>
+                <div class="p-col-12 p-md-6 p-lg-4">
+                    <label for="service">Service</label>
+                    <p-dropdown id="service" [options]="services" formControlName="service" placeholder="Select a service" optionLabel="name">
+                    </p-dropdown>
                 </div>
 
                 <div class="p-col-12 p-md-6 p-lg-12 panel">

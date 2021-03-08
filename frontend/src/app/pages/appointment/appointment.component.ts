@@ -26,10 +26,12 @@ export class AppointmentComponent implements OnInit {
   page: any;
   options: any[];
   appointment: FormGroup;
+  services: any[];
 
   timelist: any[];
 
   ngOnInit(): void {
+    this.getservices();
     this.settimelist();
     this.appointment = this.fb.group({
       ptid: new FormControl(),
@@ -38,13 +40,23 @@ export class AppointmentComponent implements OnInit {
       ptcontact: new FormControl('', Validators.required),
       scheddate: new FormControl(new Date(), Validators.required),
       schedtime: new FormControl('', Validators.required),
+      service: new FormControl(''),
     });
     this.getappointments(10, 0);
+  }
+
+  getservices() {
+    this.service.getallservicelist().subscribe(res => {
+      this.services = res.services;
+    }, err => {
+      this.tokenService.checkSession(err);
+    });
   }
 
   onSubmit(value: string) {
     let app = JSON.parse(JSON.stringify(value));
     app.schedtime = app.schedtime.value;
+    app.service = app.service.name;
     this.confirmationService.confirm({
       message: 'Schedule new appointment',
       accept: () => {

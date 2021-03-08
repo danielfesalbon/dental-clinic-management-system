@@ -68,6 +68,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 		try {
 			// Time time = schedUtil.getTimeOf(appointment.getSchedtime());
 			Appointment app = new Appointment();
+			app.setService(appointment.getService());
 			app.setDatecreated(new Date());
 			app.setPtid(appointment.getPtid());
 			app.setPtfirstname(appointment.getPtfirstname());
@@ -83,6 +84,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 			Appointment existing = new Appointment();
 			// existing.setScheddate(app.getScheddate());
 			existing.setSchedtime(app.getSchedtime());
+			existing.setScheddate(app.getScheddate());
 			existing.setDone(app.getDone());
 			Example<Appointment> example = Example.of(existing);
 			if (appointmentRepository.count(example) > 0) {
@@ -116,6 +118,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 				a.setScheddate(dateFormat.format(appointment.getScheddate()));
 				a.setDoctor(appointment.getDoctor());
+				a.setService(appointment.getService());
 				a.setRemarks(appointment.getRemarks());
 				a.setDone(appointment.isDone());
 				Appointment existing = new Appointment();

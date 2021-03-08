@@ -212,4 +212,32 @@ public class PatientServiceImpl implements PatientService {
 		return ResponseEntity.ok().body(response);
 	}
 
+	@Override
+	public ResponseEntity<Map<String, Object>> getPatientByName(Long id, String firstname, String lastname) {
+		// TODO Auto-generated method stub
+		Map<String, Object> response = new HashMap<String, Object>();
+		try {
+
+			if (patientRepository.existsById(id)) {
+				Patient p = patientRepository.findById(id).get();
+			
+				if (p.getFirstname().toUpperCase().equals(firstname.toUpperCase())
+						&& p.getLastname().toUpperCase().equals(lastname.toUpperCase())) {
+					response.put("patient", p);
+				} else {
+					response.put("message", "Invalid Credentials");
+					return ResponseEntity.badRequest().body(response);
+				}
+			} else {
+				return ResponseEntity.notFound().build();
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.badRequest().body(response);
+			// TODO: handle exception
+		}
+		return ResponseEntity.ok().body(response);
+	}
+
 }

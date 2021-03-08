@@ -23,6 +23,15 @@ public class AppointmentBody {
 	private Date datecreated;
 	private String doctor;
 	private boolean done;
+	private String service;
+
+	public String getService() {
+		return service;
+	}
+
+	public void setService(String service) {
+		this.service = service;
+	}
 
 	@Override
 	public String toString() {

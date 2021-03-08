@@ -63,23 +63,23 @@
                         <button pButton pRipple type="button" label="CONTACT US" icon="pi pi-phone" class="p-button-rounded p-button-info"></button>
                     </div>
                     <br>
-                    <div>(Smart) 09123456789 </div>
+                    <div>{{details.contact1}}</div>
                     <br>
-                    <div>(Globe) 09123456789 </div>
+                    <div>{{details.contact2}}</div>
                     <br>
                     <div>
                         <button pButton pRipple type="button" label="EMAIL" icon="pi pi-send" class="p-button-rounded p-button-info"></button>
 
                     </div>
                     <br>
-                    <div>email@gmail.com</div>
+                    <div>{{details.email}}</div>
                     <br>
                     <div>
                         <button pButton pRipple type="button" label="CLINIC ADDRESS" icon="pi pi-map-marker" class="p-button-rounded p-button-info"></button>
 
                     </div>
                     <br>
-                    <div>123, Street, Barangay, City</div>
+                    <div>{{details.address}}</div>
                 </div>
             </div>
             <div class="p-col-12 p-md-6 p-lg-4"></div>
@@ -102,10 +102,10 @@
 </div>
 
 
-<p-dialog header="Schedule an appointment" [(visible)]="appmodal" [modal]="true" [style]="{width: '80vw'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+<p-dialog header="Schedule an appointment. For patient with existing record please enter your respective first and last name" [(visible)]="appmodal" [modal]="true" [style]="{width: '90vw'}" [baseZIndex]="100" [draggable]="false" [resizable]="false">
     <form [formGroup]="appointment" (ngSubmit)="onSubmit(appointment.value)" class="p-grid p-fluid">
         <div class="p-col-12 p-md-6 p-lg-12">
-            <label for="patientid">Search Patient (for patients with existing record)</label>
+            <label for="patientid">Search record</label>
             <div class="p-inputgroup">
                 <input id="patientid" type="text" pInputText placeholder="Patient ID" formControlName="ptid">
                 <button type="button" pButton pRipple icon="pi pi-search" (click)="searchPatient(appointment.value)"></button>
@@ -114,18 +114,24 @@
 
         <div class="p-col-12 p-md-6 p-lg-12">
             <label for="firstname">Firstname</label>
-            <input id="firstname" type="text" pInputText placeholder="Required" formControlName="ptfirstname">
+            <input id="firstname" type="text" pInputText placeholder="Required" formControlName="ptfirstname" class="all-caps">
         </div>
 
         <div class="p-col-12 p-md-6 p-lg-12">
             <label for="lastname">Lastname</label>
-            <input id="lastname" type="text" pInputText placeholder="Required" formControlName="ptlastname">
+            <input id="lastname" type="text" pInputText placeholder="Required" formControlName="ptlastname" class="all-caps">
         </div>
 
 
         <div class="p-col-12 p-md-6 p-lg-12">
             <label for="contact">Contact</label>
             <input id="contact" type="text" pInputText formControlName="contact" placeholder="Required" formControlName="ptcontact">
+        </div>
+
+        <div class="p-col-12 p-md-6 p-lg-12">
+            <label for="service">Service</label>
+            <p-dropdown id="service" [options]="services" formControlName="service" placeholder="Select a service" optionLabel="name">
+            </p-dropdown>
         </div>
 
         <div class="p-col-12 p-md-6 p-lg-12">
@@ -139,7 +145,10 @@
         </div>
     </form>
     <ng-template pTemplate="footer">
-        <button pButton pRipple label="Book" icon="pi pi-check" type="submit" [disabled]="!appointment.valid" class="p-button-raised p-button-success submit-button"></button>
+        <button pButton pRipple label="Book" icon="pi pi-check" [disabled]="!appointment.valid" (click)="onSubmit(appointment.value)" class="p-button-raised p-button-success submit-button"></button>
         <p-button icon="pi pi-times" (click)="appmodal=false" label="Close" styleClass="p-button-text"></p-button>
     </ng-template>
 </p-dialog>
+
+<p-confirmDialog key="landing-conf" [baseZIndex]="10000" [rejectVisible]="false" [closeOnEscape]="false">
+</p-confirmDialog>

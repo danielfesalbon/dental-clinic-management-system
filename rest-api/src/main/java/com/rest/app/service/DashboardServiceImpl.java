@@ -87,8 +87,8 @@ public class DashboardServiceImpl implements DashboardService {
 				dateCal.set(Calendar.MINUTE, timeCal.get(Calendar.MINUTE));
 				sched.setStart(dateCal.getTime());
 				sched.setId(a.getId());
-				sched.setTitle(
-						a.getPtid() + ", " + a.getPtfirstname().charAt(0) + ". " + a.getPtlastname().charAt(0) + ".");
+				String id = a.getPtid() != null ? "" + a.getPtid() + ", " : "";
+				sched.setTitle(id + a.getPtfirstname().charAt(0) + ". " + a.getPtlastname().charAt(0) + ".");
 				dateCal.add(Calendar.HOUR, 1);
 				sched.setEnd(dateCal.getTime());
 				sched.setBackgroundColor("");

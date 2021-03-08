@@ -29,4 +29,6 @@ public interface PatientService {
 
 	ResponseEntity<Map<String, Object>> uploadPatient(List<Patient> patient);
 
+	ResponseEntity<Map<String, Object>> getPatientByName(Long id, String firstname, String lastname);
+
 }

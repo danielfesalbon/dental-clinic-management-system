@@ -1,8 +1,9 @@
 <div class="layout">
 
     <div class="sticky">
+        <div class="app-logo"></div>
         <label class="app-name"> <b> DENTAL CLINIC MANAGEMENT SYSTEM </b></label>
-        <button pButton pRipple label="Logout" icon="pi pi-sign-out" class="p-mr-2 p-mb-2 logout-button" (click)="onlogout()"></button>
+        <button id="logoutbtn" pButton pRipple label="Logout" icon="pi pi-sign-out" class="p-mr-2 p-mb-2 logout-button" (click)="onlogout()"></button>
     </div>
 
     <div class="header">
@@ -22,8 +23,8 @@
         <a routerLink="dashboard"> <i class="pi pi-chart-bar"></i> Dashboard</a>
         <a routerLink="patient"> <i class="pi pi-users"></i> Patients</a>
         <a routerLink="users"> <i class="pi pi-user"></i> Staff</a>
-        <a routerLink="appointment"> <i class="pi pi-calendar"></i> Appointments
-        </a>
+        <a routerLink="appointment"> <i class="pi pi-calendar"></i> Appointments</a>
+        <a routerLink="services"> <i class="pi pi-star-o"></i> Services</a>
         <a routerLink="inventory"> <i class="pi pi-th-large"></i> Inventory</a>
         <a routerLink="invoice"> <i class="pi pi-folder"></i> Invoice</a>
         <a routerLink="transaction"> <i class="pi pi-credit-card"></i> Payments</a>
@@ -39,9 +40,26 @@
     </div>
 
     <div class="bottomnav">
-        <button pButton icon="pi pi-list" pRipple (click)="bottombar = true" type="button" class="p-button-text bottom-menu"></button>
+        <!--<button pButton icon="pi pi-list" pRipple (click)="bottombar = true" type="button" class="p-button-text bottom-menu"></button>
 
-        <button pButton pRipple label="Account" icon="pi pi-user-edit" (click)="showprofile()" class="p-mr-2 p-mb-2 account-button"></button>
+        <button pButton pRipple label="Account" icon="pi pi-user-edit" (click)="showprofile()" class="p-mr-2 p-mb-2 account-button"></button>-->
+        <div class="p-grid p-fluid">
+            <div class="p-col-4 p-md-6 p-lg-12">
+                <div class="bottom-button">
+                    <button pButton icon="pi pi-list" pRipple (click)="bottombar = true" type="button" class="p-button-text"></button>
+                </div>
+            </div>
+            <div class="p-col-4 p-md-6 p-lg-12">
+                <div class="bottom-button">
+                    <button pButton pRipple icon="pi pi-user-edit" (click)="showprofile()" class="p-button-text"></button>
+                </div>
+            </div>
+            <div class="p-col-4 p-md-6 p-lg-12">
+                <div class="bottom-button">
+                    <button pButton pRipple icon="pi pi-sign-out" class="p-button-text" (click)="onlogout()"></button>
+                </div>
+            </div>
+        </div>
     </div>
 
 </div>
@@ -51,6 +69,7 @@
     <a routerLink="patient"> <i class="pi pi-users"></i> Patients</a>
     <a routerLink="users"> <i class="pi pi-user"> </i> Staff</a>
     <a routerLink="appointment"> <i class="pi pi-calendar"></i> Appointments</a>
+    <a routerLink="services"> <i class="pi pi-star-o"></i> Services</a>
     <a routerLink="inventory"> <i class="pi pi-th-large"></i> Inventory</a>
     <a routerLink="invoice"> <i class="pi pi-folder"></i> Invoice</a>
     <a routerLink="transaction"> <i class="pi pi-credit-card"></i> Payments</a>
@@ -61,7 +80,7 @@
 
 <p-confirmDialog [baseZIndex]="10000" rejectButtonStyleClass="p-button-outlined"></p-confirmDialog>
 
-<p-dialog header="Hello, {{name}}!" [(visible)]="usermodal" [modal]="true" [position]="position" [style]="{width: '70vw'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false" [closable]="true">
+<p-dialog header="Hello, {{name}}!" [(visible)]="usermodal" [modal]="true" [position]="position" [style]="{width: '90vw'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false" [closable]="true">
 
     <form [formGroup]="userform" (ngSubmit)="saveuser(userform.value)" class="p-grid p-fluid">
         <div class="p-col-12 p-md-6 p-lg-3">
