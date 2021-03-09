@@ -79,7 +79,7 @@ export class AppointmentComponent implements OnInit {
     let p = JSON.parse(JSON.stringify(value));
     this.service.getpatient(p.ptid, 10, 0, 10, 0, 10, 0).subscribe(res => {
       let patient = res.patient;
-      this.appointment.setValue({ ptid: patient.id, ptfirstname: patient.firstname, ptlastname: patient.lastname, ptcontact: patient.contact, scheddate: null, schedtime: null })
+      this.appointment.setValue({ ptid: patient.id, ptfirstname: patient.firstname, ptlastname: patient.lastname, ptcontact: patient.contact, scheddate: null, schedtime: null, service: null })
       this.messageService.add({ key: 'bc', severity: 'info', summary: 'Success', detail: 'Patient data fetched' });
     }, err => {
       this.tokenService.checkSession(err);

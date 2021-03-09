@@ -22,6 +22,7 @@ import com.rest.app.repo.AppointmentRepository;
 import com.rest.app.table.Appointment;
 import com.rest.app.util.AppointmentBody;
 import com.rest.app.util.PaginationUtil;
+import com.rest.app.util.ScheduleUtil;
 
 /**
  * @author danielf
@@ -36,8 +37,8 @@ public class AppointmentServiceImpl implements AppointmentService {
 	@Autowired
 	private AppointmentRepository appointmentRepository;
 
-//	@Autowired
-//	private ScheduleUtil schedUtil;
+	@Autowired
+	private ScheduleUtil schedUtil;
 
 	@Override
 	public ResponseEntity<Map<String, Object>> getAppointmentList(Integer row, Integer page) {
@@ -61,6 +62,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 		return ResponseEntity.ok().body(response);
 	}
 
+	@SuppressWarnings("static-access")
 	@Override
 	public ResponseEntity<Map<String, Object>> saveAppointment(AppointmentBody appointment) {
 		// TODO Auto-generated method stub
@@ -71,13 +73,13 @@ public class AppointmentServiceImpl implements AppointmentService {
 			app.setService(appointment.getService());
 			app.setDatecreated(new Date());
 			app.setPtid(appointment.getPtid());
-			app.setPtfirstname(appointment.getPtfirstname());
-			app.setPtlastname(appointment.getPtlastname());
+			app.setPtfirstname(appointment.getPtfirstname().toUpperCase());
+			app.setPtlastname(appointment.getPtlastname().toUpperCase());
 			app.setPtaddress(appointment.getPtaddress());
 			app.setPtcontact(appointment.getPtcontact());
 			app.setRemarks(appointment.getRemarks());
 			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-			app.setScheddate(dateFormat.format(appointment.getScheddate()));
+			app.setScheddate(dateFormat.format(schedUtil.addDays(appointment.getScheddate(), 1)));
 			app.setSchedtime(appointment.getSchedtime());
 			app.setDone(false);
 			response.put("event", "Saved new appointment schedule");

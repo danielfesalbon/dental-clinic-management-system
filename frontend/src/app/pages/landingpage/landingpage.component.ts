@@ -57,12 +57,10 @@ export class LandingpageComponent implements OnInit {
       this.appointment.setValue({ ptid: patient.id, ptfirstname: patient.firstname, ptlastname: patient.lastname, ptcontact: patient.contact, scheddate: null, schedtime: null, service: null })
       this.messageService.add({ key: 'bc', severity: 'info', summary: 'Success', detail: 'Patient data fetched' });
     }, err => {
-      console.log(err);
       this.tokenService.checkSession(err);
+      this.messageService.add({ key: 'bc', severity: 'error', summary: 'Failed', detail: err.message });
       if (err.status == 404) {
         this.messageService.add({ key: 'bc', severity: 'error', summary: 'Failed', detail: 'Not found' });
-      } else {
-        this.messageService.add({ key: 'bc', severity: 'error', summary: 'Failed', detail: err.error.message });
       }
     });
   }
