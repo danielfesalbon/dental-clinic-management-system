@@ -137,4 +137,22 @@ export class AppointmentdetailsComponent implements OnInit {
     });
   }
 
+
+  deleteAppointment() {
+    this.confirmationService.confirm({
+      message: 'Make sure you inform the patient before proceeding.',
+      accept: () => {
+        this.service.deleteappointment(this.app.id).subscribe(res => {
+          if (res.flag == 'success') {
+            this.messageService.add({ key: 'bc', severity: 'success', summary: 'Success', detail: res.event });
+            this.router.navigateByUrl("back-office/main/appointment");
+          }
+        }, err => {
+          this.tokenService.checkSession(err);
+          this.messageService.add({ key: 'bc', severity: 'error', summary: 'Failed', detail: err.error.event });
+        });
+      },
+    });
+  }
+
 }

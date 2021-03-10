@@ -44,7 +44,10 @@
         </div>
 
         <div class="p-col-12 p-md-6 p-lg-12">
-            <button pButton pRipple label="Update" type="submit" [disabled]="!appointment.valid" class="p-button-raised p-button-success submit-button"></button>
+            <button pButton pRipple icon="pi pi-save" label="Update" type="submit" [disabled]="!appointment.valid" class="p-button-raised p-button-success submit-button"></button>
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-12">
+            <button pButton pRipple icon="pi pi-trash" label="Remove" type="button" class="p-button-raised p-button-danger submit-button" (click)="deleteAppointment()"></button>
         </div>
     </form>
 </p-card>

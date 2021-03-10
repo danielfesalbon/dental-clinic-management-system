@@ -199,4 +199,8 @@ export class BackendService {
     return this.http.delete<any>(this.servicelink + '/service/delete/' + serviceid);
   }
 
+  deleteappointment(id) {
+    return this.http.delete<any>(this.servicelink + '/appointment/delete/' + id);
+  }
+
 }

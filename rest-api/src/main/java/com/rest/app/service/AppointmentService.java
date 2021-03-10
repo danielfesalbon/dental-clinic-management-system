@@ -23,4 +23,6 @@ public interface AppointmentService {
 
 	ResponseEntity<Map<String, Object>> getAppointment(Long id);
 
+	ResponseEntity<Map<String, Object>> deleteAppointment(Long id);
+
 }

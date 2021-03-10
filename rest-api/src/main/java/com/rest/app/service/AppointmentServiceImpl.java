@@ -172,4 +172,28 @@ public class AppointmentServiceImpl implements AppointmentService {
 		return ResponseEntity.ok().body(response);
 	}
 
+	@Override
+	public ResponseEntity<Map<String, Object>> deleteAppointment(Long id) {
+		// TODO Auto-generated method stub
+		Map<String, Object> response = new HashMap<String, Object>();
+		try {
+
+			if (appointmentRepository.existsById(id)) {
+				Appointment app = appointmentRepository.findById(id).get();
+				appointmentRepository.delete(app);
+				response.put("event", "Appointment: " + app.getId() + ", removed.");
+				response.put("flag", "success");
+			} else {
+				return ResponseEntity.notFound().build();
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.put("flag", "failed");
+			return ResponseEntity.badRequest().body(response);
+			// TODO: handle exception
+		}
+		return ResponseEntity.ok().body(response);
+	}
+
 }
